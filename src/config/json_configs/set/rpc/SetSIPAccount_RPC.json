@@ -3,10 +3,10 @@
   "method": "SetSIPAccount",
   "params": {
     "SIPAccount": {
-      "UserId": "user4568",
-      "Password": "335929990d369859",
-      "Registrar": "192.168.0.185",
-      "PublicDomain": "example94.com"
+      "UserId": "user5981",
+      "Password": "3073380bc11939e0",
+      "Registrar": "192.168.0.167",
+      "PublicDomain": "example54.com"
     }
   },
   "id": "helmut"

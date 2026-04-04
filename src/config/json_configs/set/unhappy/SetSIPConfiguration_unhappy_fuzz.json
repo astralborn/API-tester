@@ -1,5 +1,5 @@
 {
   "SIPConfiguration": {
-    "SIPEnabled": 0
+    "SIPEnabled": -1
   }
 }

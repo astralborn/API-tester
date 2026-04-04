@@ -1,1 +1,1171 @@
-[]
+[
+  {
+    "name": "GetContacts_Normal_Path",
+    "endpoint": "/api/intercom/GetContacts",
+    "json_file": "get/normal_path/GetContacts_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetContacts_Normal_Action",
+    "endpoint": "/api/intercom/GetContacts?action=GetContacts",
+    "json_file": "get/normal_action/GetContacts_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetContacts_Normal_Body",
+    "endpoint": "/api/intercom",
+    "json_file": "get/normal_body/GetContacts_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetContacts_Google",
+    "endpoint": "/api/intercom",
+    "json_file": "get/google/GetContacts_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetContacts_RPC",
+    "endpoint": "/api/intercom",
+    "json_file": "get/rpc/GetContacts_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSIPAccount_Normal_Path",
+    "endpoint": "/api/call/GetSIPAccount",
+    "json_file": "get/normal_path/GetSIPAccount_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccount_Normal_Action",
+    "endpoint": "/api/call/GetSIPAccount?action=GetSIPAccount",
+    "json_file": "get/normal_action/GetSIPAccount_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccount_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetSIPAccount_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccount_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetSIPAccount_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetSIPAccount_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetSIPAccount_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSIPAccounts_Normal_Path",
+    "endpoint": "/api/call/GetSIPAccounts",
+    "json_file": "get/normal_path/GetSIPAccounts_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccounts_Normal_Action",
+    "endpoint": "/api/call/GetSIPAccounts?action=GetSIPAccounts",
+    "json_file": "get/normal_action/GetSIPAccounts_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccounts_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetSIPAccounts_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccounts_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetSIPAccounts_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetSIPAccounts_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetSIPAccounts_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSIPAccountStatus_Normal_Path",
+    "endpoint": "/api/call/GetSIPAccountStatus",
+    "json_file": "get/normal_path/GetSIPAccountStatus_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccountStatus_Normal_Action",
+    "endpoint": "/api/call/GetSIPAccountStatus?action=GetSIPAccountStatus",
+    "json_file": "get/normal_action/GetSIPAccountStatus_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccountStatus_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetSIPAccountStatus_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccountStatus_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetSIPAccountStatus_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetSIPAccountStatus_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetSIPAccountStatus_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetServiceCapabilities_Normal_Path",
+    "endpoint": "/api/call/GetServiceCapabilities",
+    "json_file": "get/normal_path/GetServiceCapabilities_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetServiceCapabilities_Normal_Action",
+    "endpoint": "/api/call/GetServiceCapabilities?action=GetServiceCapabilities",
+    "json_file": "get/normal_action/GetServiceCapabilities_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetServiceCapabilities_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetServiceCapabilities_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetServiceCapabilities_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetServiceCapabilities_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetServiceCapabilities_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetServiceCapabilities_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSupportedSIPAccountAttributes_Normal_Path",
+    "endpoint": "/api/call/GetSupportedSIPAccountAttributes",
+    "json_file": "get/normal_path/GetSupportedSIPAccountAttributes_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedSIPAccountAttributes_Normal_Action",
+    "endpoint": "/api/call/GetSupportedSIPAccountAttributes?action=GetSupportedSIPAccountAttributes",
+    "json_file": "get/normal_action/GetSupportedSIPAccountAttributes_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedSIPAccountAttributes_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetSupportedSIPAccountAttributes_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedSIPAccountAttributes_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetSupportedSIPAccountAttributes_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetSupportedSIPAccountAttributes_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetSupportedSIPAccountAttributes_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSupportedSIPConfigurationAttributes_Normal_Path",
+    "endpoint": "/api/call/GetSupportedSIPConfigurationAttributes",
+    "json_file": "get/normal_path/GetSupportedSIPConfigurationAttributes_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedSIPConfigurationAttributes_Normal_Action",
+    "endpoint": "/api/call/GetSupportedSIPConfigurationAttributes?action=GetSupportedSIPConfigurationAttributes",
+    "json_file": "get/normal_action/GetSupportedSIPConfigurationAttributes_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedSIPConfigurationAttributes_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetSupportedSIPConfigurationAttributes_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedSIPConfigurationAttributes_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetSupportedSIPConfigurationAttributes_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetSupportedSIPConfigurationAttributes_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetSupportedSIPConfigurationAttributes_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSIPConfiguration_Normal_Path",
+    "endpoint": "/api/call/GetSIPConfiguration",
+    "json_file": "get/normal_path/GetSIPConfiguration_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPConfiguration_Normal_Action",
+    "endpoint": "/api/call/GetSIPConfiguration?action=GetSIPConfiguration",
+    "json_file": "get/normal_action/GetSIPConfiguration_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPConfiguration_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetSIPConfiguration_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPConfiguration_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetSIPConfiguration_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetSIPConfiguration_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetSIPConfiguration_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSupportedMediaEncryptionModes_Normal_Path",
+    "endpoint": "/api/call/GetSupportedMediaEncryptionModes",
+    "json_file": "get/normal_path/GetSupportedMediaEncryptionModes_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedMediaEncryptionModes_Normal_Action",
+    "endpoint": "/api/call/GetSupportedMediaEncryptionModes?action=GetSupportedMediaEncryptionModes",
+    "json_file": "get/normal_action/GetSupportedMediaEncryptionModes_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedMediaEncryptionModes_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetSupportedMediaEncryptionModes_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedMediaEncryptionModes_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetSupportedMediaEncryptionModes_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetSupportedMediaEncryptionModes_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetSupportedMediaEncryptionModes_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetDefaultAudioCodecs_Normal_Path",
+    "endpoint": "/api/call/GetDefaultAudioCodecs",
+    "json_file": "get/normal_path/GetDefaultAudioCodecs_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetDefaultAudioCodecs_Normal_Action",
+    "endpoint": "/api/call/GetDefaultAudioCodecs?action=GetDefaultAudioCodecs",
+    "json_file": "get/normal_action/GetDefaultAudioCodecs_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetDefaultAudioCodecs_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetDefaultAudioCodecs_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetDefaultAudioCodecs_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetDefaultAudioCodecs_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetDefaultAudioCodecs_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetDefaultAudioCodecs_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSupportedAudioCodecs_Normal_Path",
+    "endpoint": "/api/call/GetSupportedAudioCodecs",
+    "json_file": "get/normal_path/GetSupportedAudioCodecs_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedAudioCodecs_Normal_Action",
+    "endpoint": "/api/call/GetSupportedAudioCodecs?action=GetSupportedAudioCodecs",
+    "json_file": "get/normal_action/GetSupportedAudioCodecs_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedAudioCodecs_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetSupportedAudioCodecs_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSupportedAudioCodecs_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetSupportedAudioCodecs_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetSupportedAudioCodecs_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetSupportedAudioCodecs_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetAudioCodecs_Normal_Path",
+    "endpoint": "/api/call/GetAudioCodecs",
+    "json_file": "get/normal_path/GetAudioCodecs_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetAudioCodecs_Normal_Action",
+    "endpoint": "/api/call/GetAudioCodecs?action=GetAudioCodecs",
+    "json_file": "get/normal_action/GetAudioCodecs_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetAudioCodecs_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetAudioCodecs_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetAudioCodecs_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetAudioCodecs_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetAudioCodecs_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetAudioCodecs_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetCallStatus_Normal_Path",
+    "endpoint": "/api/call/GetCallStatus",
+    "json_file": "get/normal_path/GetCallStatus_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetCallStatus_Normal_Action",
+    "endpoint": "/api/call/GetCallStatus?action=GetCallStatus",
+    "json_file": "get/normal_action/GetCallStatus_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetCallStatus_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "get/normal_body/GetCallStatus_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetCallStatus_Google",
+    "endpoint": "/api/call",
+    "json_file": "get/google/GetCallStatus_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "GetCallStatus_RPC",
+    "endpoint": "/api/call",
+    "json_file": "get/rpc/GetCallStatus_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "SetSIPAccount_Normal_Path",
+    "endpoint": "/api/call/SetSIPAccount",
+    "json_file": "set/normal_path/SetSIPAccount_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccount_Normal_Action",
+    "endpoint": "/api/call/SetSIPAccount?action=SetSIPAccount",
+    "json_file": "set/normal_action/SetSIPAccount_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccount_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "set/normal_body/SetSIPAccount_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccount_Google",
+    "endpoint": "/api/call",
+    "json_file": "set/google/SetSIPAccount_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "SetSIPAccount_RPC",
+    "endpoint": "/api/call",
+    "json_file": "set/rpc/SetSIPAccount_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "SetSIPAccounts_Normal_Path",
+    "endpoint": "/api/call/SetSIPAccounts",
+    "json_file": "set/normal_path/SetSIPAccounts_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccounts_Normal_Action",
+    "endpoint": "/api/call/SetSIPAccounts?action=SetSIPAccounts",
+    "json_file": "set/normal_action/SetSIPAccounts_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccounts_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "set/normal_body/SetSIPAccounts_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccounts_Google",
+    "endpoint": "/api/call",
+    "json_file": "set/google/SetSIPAccounts_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "SetSIPAccounts_RPC",
+    "endpoint": "/api/call",
+    "json_file": "set/rpc/SetSIPAccounts_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "SetSIPConfiguration_Normal_Path",
+    "endpoint": "/api/call/SetSIPConfiguration",
+    "json_file": "set/normal_path/SetSIPConfiguration_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPConfiguration_Normal_Action",
+    "endpoint": "/api/call/SetSIPConfiguration?action=SetSIPConfiguration",
+    "json_file": "set/normal_action/SetSIPConfiguration_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPConfiguration_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "set/normal_body/SetSIPConfiguration_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPConfiguration_Google",
+    "endpoint": "/api/call",
+    "json_file": "set/google/SetSIPConfiguration_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "SetSIPConfiguration_RPC",
+    "endpoint": "/api/call",
+    "json_file": "set/rpc/SetSIPConfiguration_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "SetAudioCodecs_Normal_Path",
+    "endpoint": "/api/call/SetAudioCodecs",
+    "json_file": "set/normal_path/SetAudioCodecs_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetAudioCodecs_Normal_Action",
+    "endpoint": "/api/call/SetAudioCodecs?action=SetAudioCodecs",
+    "json_file": "set/normal_action/SetAudioCodecs_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetAudioCodecs_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "set/normal_body/SetAudioCodecs_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetAudioCodecs_Google",
+    "endpoint": "/api/call",
+    "json_file": "set/google/SetAudioCodecs_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "SetAudioCodecs_RPC",
+    "endpoint": "/api/call",
+    "json_file": "set/rpc/SetAudioCodecs_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "Call_Normal_Path",
+    "endpoint": "/api/call/Call",
+    "json_file": "set/normal_path/Call_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "Call_Normal_Action",
+    "endpoint": "/api/call/Call?action=Call",
+    "json_file": "set/normal_action/Call_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "Call_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "set/normal_body/Call_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "Call_Google",
+    "endpoint": "/api/call",
+    "json_file": "set/google/Call_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "Call_RPC",
+    "endpoint": "/api/call",
+    "json_file": "set/rpc/Call_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "TerminateCall_Normal_Path",
+    "endpoint": "/api/call/TerminateCall",
+    "json_file": "set/normal_path/TerminateCall_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "TerminateCall_Normal_Action",
+    "endpoint": "/api/call/TerminateCall?action=TerminateCall",
+    "json_file": "set/normal_action/TerminateCall_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "TerminateCall_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "set/normal_body/TerminateCall_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "TerminateCall_Google",
+    "endpoint": "/api/call",
+    "json_file": "set/google/TerminateCall_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "TerminateCall_RPC",
+    "endpoint": "/api/call",
+    "json_file": "set/rpc/TerminateCall_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "SetContacts_Normal_Path",
+    "endpoint": "/api/intercom/SetContacts",
+    "json_file": "set/normal_path/SetContacts_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetContacts_Normal_Action",
+    "endpoint": "/api/intercom/SetContacts?action=SetContacts",
+    "json_file": "set/normal_action/SetContacts_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetContacts_Normal_Body",
+    "endpoint": "/api/intercom",
+    "json_file": "set/normal_body/SetContacts_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetContacts_Google",
+    "endpoint": "/api/intercom",
+    "json_file": "set/google/SetContacts_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "SetContacts_RPC",
+    "endpoint": "/api/intercom",
+    "json_file": "set/rpc/SetContacts_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "RemoveSIPAccount_Normal_Path",
+    "endpoint": "/api/call/RemoveSIPAccount",
+    "json_file": "remove/normal_path/RemoveSIPAccount_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccount_Normal_Action",
+    "endpoint": "/api/call/RemoveSIPAccount?action=RemoveSIPAccount",
+    "json_file": "remove/normal_action/RemoveSIPAccount_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccount_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "remove/normal_body/RemoveSIPAccount_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccount_Google",
+    "endpoint": "/api/call",
+    "json_file": "remove/google/RemoveSIPAccount_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "RemoveSIPAccount_RPC",
+    "endpoint": "/api/call",
+    "json_file": "remove/rpc/RemoveSIPAccount_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "RemoveSIPAccounts_Normal_Path",
+    "endpoint": "/api/call/RemoveSIPAccounts",
+    "json_file": "remove/normal_path/RemoveSIPAccounts_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccounts_Normal_Action",
+    "endpoint": "/api/call/RemoveSIPAccounts?action=RemoveSIPAccounts",
+    "json_file": "remove/normal_action/RemoveSIPAccounts_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccounts_Normal_Body",
+    "endpoint": "/api/call",
+    "json_file": "remove/normal_body/RemoveSIPAccounts_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccounts_Google",
+    "endpoint": "/api/call",
+    "json_file": "remove/google/RemoveSIPAccounts_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "RemoveSIPAccounts_RPC",
+    "endpoint": "/api/call",
+    "json_file": "remove/rpc/RemoveSIPAccounts_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "RemoveContacts_Normal_Path",
+    "endpoint": "/api/intercom/RemoveContacts",
+    "json_file": "remove/normal_path/RemoveContacts_Normal_Path.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveContacts_Normal_Action",
+    "endpoint": "/api/intercom/RemoveContacts?action=RemoveContacts",
+    "json_file": "remove/normal_action/RemoveContacts_Normal_Action.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveContacts_Normal_Body",
+    "endpoint": "/api/intercom",
+    "json_file": "remove/normal_body/RemoveContacts_Normal_Body.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveContacts_Google",
+    "endpoint": "/api/intercom",
+    "json_file": "remove/google/RemoveContacts_Google.json",
+    "simple_format": false,
+    "json_type": "google"
+  },
+  {
+    "name": "RemoveContacts_RPC",
+    "endpoint": "/api/intercom",
+    "json_file": "remove/rpc/RemoveContacts_RPC.json",
+    "simple_format": false,
+    "json_type": "rpc"
+  },
+  {
+    "name": "GetSIPAccount_unhappy_no_data",
+    "endpoint": "/api/call/GetSIPAccount",
+    "json_file": "get/unhappy/GetSIPAccount_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccount_unhappy_invalid_data",
+    "endpoint": "/api/call/GetSIPAccount",
+    "json_file": "get/unhappy/GetSIPAccount_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccount_unhappy_wrong_type",
+    "endpoint": "/api/call/GetSIPAccount",
+    "json_file": "get/unhappy/GetSIPAccount_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccount_unhappy_fuzz",
+    "endpoint": "/api/call/GetSIPAccount",
+    "json_file": "get/unhappy/GetSIPAccount_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccountStatus_unhappy_no_data",
+    "endpoint": "/api/call/GetSIPAccountStatus",
+    "json_file": "get/unhappy/GetSIPAccountStatus_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccountStatus_unhappy_invalid_data",
+    "endpoint": "/api/call/GetSIPAccountStatus",
+    "json_file": "get/unhappy/GetSIPAccountStatus_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccountStatus_unhappy_wrong_type",
+    "endpoint": "/api/call/GetSIPAccountStatus",
+    "json_file": "get/unhappy/GetSIPAccountStatus_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetSIPAccountStatus_unhappy_fuzz",
+    "endpoint": "/api/call/GetSIPAccountStatus",
+    "json_file": "get/unhappy/GetSIPAccountStatus_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetCallStatus_unhappy_no_data",
+    "endpoint": "/api/call/GetCallStatus",
+    "json_file": "get/unhappy/GetCallStatus_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetCallStatus_unhappy_invalid_data",
+    "endpoint": "/api/call/GetCallStatus",
+    "json_file": "get/unhappy/GetCallStatus_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetCallStatus_unhappy_wrong_type",
+    "endpoint": "/api/call/GetCallStatus",
+    "json_file": "get/unhappy/GetCallStatus_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "GetCallStatus_unhappy_fuzz",
+    "endpoint": "/api/call/GetCallStatus",
+    "json_file": "get/unhappy/GetCallStatus_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccount_unhappy_no_data",
+    "endpoint": "/api/call/SetSIPAccount",
+    "json_file": "set/unhappy/SetSIPAccount_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccount_unhappy_invalid_data",
+    "endpoint": "/api/call/SetSIPAccount",
+    "json_file": "set/unhappy/SetSIPAccount_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccount_unhappy_wrong_type",
+    "endpoint": "/api/call/SetSIPAccount",
+    "json_file": "set/unhappy/SetSIPAccount_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccount_unhappy_fuzz",
+    "endpoint": "/api/call/SetSIPAccount",
+    "json_file": "set/unhappy/SetSIPAccount_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccounts_unhappy_no_data",
+    "endpoint": "/api/call/SetSIPAccounts",
+    "json_file": "set/unhappy/SetSIPAccounts_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccounts_unhappy_invalid_data",
+    "endpoint": "/api/call/SetSIPAccounts",
+    "json_file": "set/unhappy/SetSIPAccounts_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccounts_unhappy_wrong_type",
+    "endpoint": "/api/call/SetSIPAccounts",
+    "json_file": "set/unhappy/SetSIPAccounts_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPAccounts_unhappy_fuzz",
+    "endpoint": "/api/call/SetSIPAccounts",
+    "json_file": "set/unhappy/SetSIPAccounts_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPConfiguration_unhappy_no_data",
+    "endpoint": "/api/call/SetSIPConfiguration",
+    "json_file": "set/unhappy/SetSIPConfiguration_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPConfiguration_unhappy_invalid_data",
+    "endpoint": "/api/call/SetSIPConfiguration",
+    "json_file": "set/unhappy/SetSIPConfiguration_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPConfiguration_unhappy_wrong_type",
+    "endpoint": "/api/call/SetSIPConfiguration",
+    "json_file": "set/unhappy/SetSIPConfiguration_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetSIPConfiguration_unhappy_fuzz",
+    "endpoint": "/api/call/SetSIPConfiguration",
+    "json_file": "set/unhappy/SetSIPConfiguration_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetAudioCodecs_unhappy_no_data",
+    "endpoint": "/api/call/SetAudioCodecs",
+    "json_file": "set/unhappy/SetAudioCodecs_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetAudioCodecs_unhappy_invalid_data",
+    "endpoint": "/api/call/SetAudioCodecs",
+    "json_file": "set/unhappy/SetAudioCodecs_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetAudioCodecs_unhappy_wrong_type",
+    "endpoint": "/api/call/SetAudioCodecs",
+    "json_file": "set/unhappy/SetAudioCodecs_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetAudioCodecs_unhappy_fuzz",
+    "endpoint": "/api/call/SetAudioCodecs",
+    "json_file": "set/unhappy/SetAudioCodecs_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "Call_unhappy_no_data",
+    "endpoint": "/api/call/Call",
+    "json_file": "set/unhappy/Call_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "Call_unhappy_invalid_data",
+    "endpoint": "/api/call/Call",
+    "json_file": "set/unhappy/Call_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "Call_unhappy_wrong_type",
+    "endpoint": "/api/call/Call",
+    "json_file": "set/unhappy/Call_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "Call_unhappy_fuzz",
+    "endpoint": "/api/call/Call",
+    "json_file": "set/unhappy/Call_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "TerminateCall_unhappy_no_data",
+    "endpoint": "/api/call/TerminateCall",
+    "json_file": "set/unhappy/TerminateCall_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "TerminateCall_unhappy_invalid_data",
+    "endpoint": "/api/call/TerminateCall",
+    "json_file": "set/unhappy/TerminateCall_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "TerminateCall_unhappy_wrong_type",
+    "endpoint": "/api/call/TerminateCall",
+    "json_file": "set/unhappy/TerminateCall_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "TerminateCall_unhappy_fuzz",
+    "endpoint": "/api/call/TerminateCall",
+    "json_file": "set/unhappy/TerminateCall_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetContacts_unhappy_no_data",
+    "endpoint": "/api/intercom/SetContacts",
+    "json_file": "set/unhappy/SetContacts_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetContacts_unhappy_invalid_data",
+    "endpoint": "/api/intercom/SetContacts",
+    "json_file": "set/unhappy/SetContacts_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetContacts_unhappy_wrong_type",
+    "endpoint": "/api/intercom/SetContacts",
+    "json_file": "set/unhappy/SetContacts_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "SetContacts_unhappy_fuzz",
+    "endpoint": "/api/intercom/SetContacts",
+    "json_file": "set/unhappy/SetContacts_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccount_unhappy_no_data",
+    "endpoint": "/api/call/RemoveSIPAccount",
+    "json_file": "remove/unhappy/RemoveSIPAccount_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccount_unhappy_invalid_data",
+    "endpoint": "/api/call/RemoveSIPAccount",
+    "json_file": "remove/unhappy/RemoveSIPAccount_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccount_unhappy_wrong_type",
+    "endpoint": "/api/call/RemoveSIPAccount",
+    "json_file": "remove/unhappy/RemoveSIPAccount_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccount_unhappy_fuzz",
+    "endpoint": "/api/call/RemoveSIPAccount",
+    "json_file": "remove/unhappy/RemoveSIPAccount_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccounts_unhappy_no_data",
+    "endpoint": "/api/call/RemoveSIPAccounts",
+    "json_file": "remove/unhappy/RemoveSIPAccounts_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccounts_unhappy_invalid_data",
+    "endpoint": "/api/call/RemoveSIPAccounts",
+    "json_file": "remove/unhappy/RemoveSIPAccounts_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccounts_unhappy_wrong_type",
+    "endpoint": "/api/call/RemoveSIPAccounts",
+    "json_file": "remove/unhappy/RemoveSIPAccounts_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveSIPAccounts_unhappy_fuzz",
+    "endpoint": "/api/call/RemoveSIPAccounts",
+    "json_file": "remove/unhappy/RemoveSIPAccounts_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveContacts_unhappy_no_data",
+    "endpoint": "/api/intercom/RemoveContacts",
+    "json_file": "remove/unhappy/RemoveContacts_unhappy_no_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveContacts_unhappy_invalid_data",
+    "endpoint": "/api/intercom/RemoveContacts",
+    "json_file": "remove/unhappy/RemoveContacts_unhappy_invalid_data.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveContacts_unhappy_wrong_type",
+    "endpoint": "/api/intercom/RemoveContacts",
+    "json_file": "remove/unhappy/RemoveContacts_unhappy_wrong_type.json",
+    "simple_format": false,
+    "json_type": "normal"
+  },
+  {
+    "name": "RemoveContacts_unhappy_fuzz",
+    "endpoint": "/api/intercom/RemoveContacts",
+    "json_file": "remove/unhappy/RemoveContacts_unhappy_fuzz.json",
+    "simple_format": false,
+    "json_type": "normal"
+  }
+]
