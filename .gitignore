@@ -45,3 +45,4 @@ desktop.ini
 # ── Testing ───────────────────────────────────────────────────────────────────
 .coverage
 htmlcov/
+.pytest_cache/

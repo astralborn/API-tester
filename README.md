@@ -1,12 +1,37 @@
 # API Test Tool
 
+<div align="center">
+
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
 ![PySide6](https://img.shields.io/badge/UI-PySide6-41CD52?logo=qt&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+![Tests](https://img.shields.io/badge/Tests-passing-brightgreen?logo=pytest&logoColor=white)
+![Coverage](https://img.shields.io/badge/Coverage-100%25%20modules-green?logo=codecov&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow?logo=opensourceinitiative&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows-0078D6?logo=windows&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-A desktop QA utility for testing REST API endpoints on embedded network devices.
-Built with **PySide6** · Async via **QThread** · HTTP Digest auth
+</div>
+
+---
+
+> **Desktop QA utility for testing REST API endpoints on embedded network devices.**
+> Sends authenticated HTTP requests, runs batch preset sequences, and logs every response — all from a clean two-panel UI.
+> Built with **PySide6** · Async via **QThread** · **HTTP Digest auth** · **100% module coverage**
+
+---
+
+## At a Glance
+
+| | |
+|:---|:---|
+| **Language** | Python 3.10+ |
+| **UI Framework** | PySide6 (Qt 6) |
+| **Architecture** | Mixin composition + DI container |
+| **Auth** | HTTP Digest (self-signed certificate devices) |
+| **Concurrency** | Non-blocking QThread workers, cancellable mid-run |
+| **Test suite** | pytest · 100% coverage per runtime module |
+| **Logging** | Plain text + rotating file + structured JSONL |
+| **Platforms** | Windows (primary), Linux, macOS |
 
 ---
 
@@ -157,6 +182,27 @@ Payload: {}
 Status Code: 200
 {"contacts": [...]}
 ```
+
+---
+
+## Testing
+
+```bash
+pip install -r requirements.txt
+python -m pytest tests                        # all tests, ~5 s
+python -m pytest tests --cov=src              # with coverage report
+```
+
+**All tests passing · 100% coverage per runtime module**
+
+| Layer | What's tested |
+|:---|:---|
+| **Unit** | Pure-logic methods via `__new__` + `MagicMock` — no Qt needed |
+| **Widget** | Full `ApiTestApp` with real `QApplication` (headless, via `pytest-qt`) |
+| **Persistence** | File I/O round-trips via `pytest`'s `tmp_path` fixture |
+| **HTTP worker** | `RequestWorker.run()` with `requests.post` patched — no real network |
+
+Every runtime application module sits at **100% coverage**. The only excluded files are `main.py` (entry point `__main__` block) and `json_generator.py` (dev utility script).
 
 ---
 
