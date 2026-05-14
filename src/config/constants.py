@@ -2,7 +2,6 @@ import sys
 from pathlib import Path
 from typing import Final
 
-
 # ================= Resource Paths =================
 
 def resource_path(relative_path: str) -> Path:

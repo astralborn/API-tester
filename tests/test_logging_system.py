@@ -11,21 +11,17 @@ from __future__ import annotations
 
 import json
 import logging
-import tempfile
 from pathlib import Path
 
-import pytest
-
 from config.logging_system import (
-    StructuredLogger,
     ColoredFormatter,
     JsonFormatter,
     LoggingManager,
+    StructuredLogger,
+    cleanup_logging,
     get_logger,
     set_logging_level,
-    cleanup_logging,
 )
-
 
 # ---------------------------------------------------------------------------
 # Helpers

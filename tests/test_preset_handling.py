@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 import pytest
-from tests.helpers import SAMPLE_PRESETS
 
+from tests.helpers import SAMPLE_PRESETS
 
 # ---------------------------------------------------------------------------
 # Shared fixture

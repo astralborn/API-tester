@@ -11,7 +11,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-
 # ---------------------------------------------------------------------------
 # Fixture — re-use the one from conftest via app_widget
 # ---------------------------------------------------------------------------

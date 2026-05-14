@@ -1,20 +1,26 @@
 """Request handling mixin for API Test Tool."""
 from __future__ import annotations
 
-import json
 import ipaddress
+import json
 from typing import TYPE_CHECKING
 
 from PySide6.QtGui import QTextCursor
 from PySide6.QtWidgets import (
-    QCheckBox, QComboBox, QLabel, QLineEdit,
-    QMessageBox, QPushButton, QTextEdit, QWidget,
+    QCheckBox,
+    QComboBox,
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QTextEdit,
+    QWidget,
 )
 
 if TYPE_CHECKING:
     from config.di_container import RequestManagerProtocol
-    from managers.requests_manager import RequestWorker
     from config.logging_system import StructuredLogger
+    from managers.requests_manager import RequestWorker
 
     class _RequestHandlingProtocol(QWidget):
         """Typed view of the fully-assembled host class, for use in method stubs."""
@@ -51,8 +57,7 @@ else:
 class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
     """Mixin that handles sending, cancelling, and displaying HTTP requests."""
 
-    @staticmethod
-    def _validate_ip(ip: str) -> bool:
+    def _validate_ip(self, ip: str) -> bool:
         """Return True if *ip* is a valid IPv4 or IPv6 address."""
         try:
             ipaddress.ip_address(ip)

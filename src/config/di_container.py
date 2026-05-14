@@ -1,9 +1,9 @@
 """Dependency injection container and Protocol interfaces for API Test Tool."""
 from __future__ import annotations
 
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable, Protocol, runtime_checkable
-
+from typing import Any, Protocol, runtime_checkable
 
 # ── Protocols ─────────────────────────────────────────────────────────────────
 

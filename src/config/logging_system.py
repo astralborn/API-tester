@@ -14,11 +14,9 @@ import json
 import logging
 import logging.handlers
 from datetime import datetime
-from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 from config.constants import resource_path
-
 
 # ── Structured Logger ─────────────────────────────────────────────────────────
 
@@ -181,14 +179,14 @@ class StructuredLogger:
 class ColoredFormatter(logging.Formatter):
     """Logging formatter that prepends ANSI colour codes to the level name."""
 
-    COLORS = {
+    COLORS: ClassVar[dict[str, str]] = {
         "DEBUG": "\033[36m",
         "INFO": "\033[32m",
         "WARNING": "\033[33m",
         "ERROR": "\033[31m",
         "CRITICAL": "\033[35m",
     }
-    RESET = "\033[0m"
+    RESET: ClassVar[str] = "\033[0m"
 
     def format(self, record: logging.LogRecord) -> str:
         """Colour the level name then delegate to the standard formatter."""

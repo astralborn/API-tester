@@ -2,11 +2,15 @@
 from __future__ import annotations
 
 import sys
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QWidget
 
+from app.preset_handling import PresetHandlingMixin
+from app.request_handling import RequestHandlingMixin
+from app.settings_handling import SettingsHandlingMixin
+from app.ui_builder import UIBuilderMixin
 from config.constants import resource_path
 from config.di_container import (
     DIContainer,
@@ -15,18 +19,12 @@ from config.di_container import (
     SettingsManagerProtocol,
 )
 from config.logging_system import get_logger
-from typing import cast
-
-from app.ui_builder import UIBuilderMixin
-from app.request_handling import RequestHandlingMixin
-from app.settings_handling import SettingsHandlingMixin
-from app.preset_handling import PresetHandlingMixin
 
 if TYPE_CHECKING:
     from managers.requests_manager import RequestWorker
 
 
-class ApiTestApp(  # type: ignore[misc]
+class ApiTestApp(  # type: ignore[misc]  # ty: ignore[inconsistent-mro]
     QWidget,
     UIBuilderMixin,
     RequestHandlingMixin,

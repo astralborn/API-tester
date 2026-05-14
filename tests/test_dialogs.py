@@ -69,7 +69,6 @@ class TestToggleSelectAll:
 
 class TestAcceptSelection:
     def test_accept_selection_records_selected_items(self, dialog):
-        from PySide6.QtCore import Qt
         # Select first and last items manually
         dialog.list_widget.item(0).setSelected(True)
         dialog.list_widget.item(2).setSelected(True)

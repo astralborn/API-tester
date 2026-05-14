@@ -1,13 +1,14 @@
 """Shared pytest fixtures for the API-tester test suite."""
 from __future__ import annotations
+
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 
 
 # ---------------------------------------------------------------------------
-# QApplication singleton – required for any Qt widget tests
+# QApplication singleton - required for any Qt widget tests
 # ---------------------------------------------------------------------------
 @pytest.fixture(scope="session")
 def qapp_session(qapp):
@@ -77,5 +78,4 @@ def mock_logger() -> MagicMock:
 # ---------------------------------------------------------------------------
 # Sample preset data (re-exported from helpers for backwards compatibility)
 # ---------------------------------------------------------------------------
-from tests.helpers import SAMPLE_PRESETS  # noqa: E402
 

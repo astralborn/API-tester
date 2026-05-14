@@ -1,13 +1,16 @@
 """HTTP request worker and manager for API Test Tool."""
 from __future__ import annotations
 
+import contextlib
 import json
 import re
+from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 import requests
+import requests.auth
 import urllib3
 from PySide6.QtCore import QThread, Signal
 
@@ -226,10 +229,8 @@ class RequestManager:
 
     def _remove_worker(self, worker: RequestWorker) -> None:
         """Remove *worker* from the active worker list (safe if already absent)."""
-        try:
+        with contextlib.suppress(ValueError):
             self.workers.remove(worker)
-        except ValueError:
-            pass
 
     def send_request_async(
         self,

@@ -1,29 +1,27 @@
 """Tests for managers/settings.py — SettingsManager."""
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from unittest.mock import patch
-
-import pytest
-
 
 # ---------------------------------------------------------------------------
 # Helper
 # ---------------------------------------------------------------------------
 
 def _make_manager(settings_file: Path):
-    with patch("managers.settings.SettingsManager.SETTINGS_FILE", str(settings_file.name)):
-        with patch("config.constants.resource_path", return_value=settings_file):
-            from managers.settings import SettingsManager
-            mgr = SettingsManager.__new__(SettingsManager)
-            mgr.settings_file = settings_file
-            mgr.settings = {}
-            mgr.load_settings()
-            return mgr
+    with (
+        patch("managers.settings.SettingsManager.SETTINGS_FILE", str(settings_file.name)),
+        patch("config.constants.resource_path", return_value=settings_file),
+    ):
+        from managers.settings import SettingsManager
+        mgr = SettingsManager.__new__(SettingsManager)
+        mgr.settings_file = settings_file
+        mgr.settings = {}
+        mgr.load_settings()
+        return mgr
 
 
-def _fresh(tmp_path: Path) -> "SettingsManager":  # noqa: F821
+def _fresh(tmp_path: Path) -> SettingsManager:  # noqa: F821
     """Create a SettingsManager backed by a temp file."""
     from managers.settings import SettingsManager
     mgr = SettingsManager.__new__(SettingsManager)
@@ -167,7 +165,6 @@ class TestPersistence:
         assert mgr.get_last_ip() == ""
 
     def test_save_fails_silently_on_bad_path(self, tmp_path):
-        from managers.settings import SettingsManager
 
         mgr = _fresh(tmp_path)
         # Point file at a directory (cannot be written)

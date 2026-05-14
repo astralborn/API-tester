@@ -1,7 +1,7 @@
 """Tests for config/di_container.py — DIContainer and protocols."""
 from __future__ import annotations
 
-from typing import Any
+from typing import ClassVar
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -14,7 +14,6 @@ from config.di_container import (
     get_container,
     resolve,
 )
-
 
 # ---------------------------------------------------------------------------
 # DIContainer — register / get
@@ -79,7 +78,7 @@ class TestDIContainer:
 class TestPresetManagerProtocol:
     def test_mock_satisfies_protocol(self):
         class Stub:
-            presets: list = []
+            presets: ClassVar[list] = []
             def load_presets(self): ...
             def save_presets(self, presets): ...
             def add_preset(self, preset): ...

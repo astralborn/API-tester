@@ -6,16 +6,21 @@ from typing import TYPE_CHECKING, Any
 
 from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import (
-    QCheckBox, QComboBox, QInputDialog, QLabel,
-    QLineEdit, QMessageBox, QWidget,
+    QCheckBox,
+    QComboBox,
+    QInputDialog,
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QWidget,
 )
 
 from app.dialogs import MultiSelectDialog
 
 if TYPE_CHECKING:
     from config.di_container import PresetManagerProtocol, RequestManagerProtocol
-    from managers.requests_manager import RequestWorker
     from config.logging_system import StructuredLogger
+    from managers.requests_manager import RequestWorker
 
     class _PresetHandlingProtocol(QWidget):
         """Typed view of the fully-assembled host class, for use in method stubs."""

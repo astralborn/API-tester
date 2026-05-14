@@ -5,21 +5,20 @@ import itertools
 from typing import TYPE_CHECKING
 
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPalette, QColor
+from PySide6.QtGui import QColor, QPalette
 from PySide6.QtWidgets import (
     QApplication,
-    QVBoxLayout,
-    QHBoxLayout,
+    QCheckBox,
     QComboBox,
+    QHBoxLayout,
+    QLabel,
     QLineEdit,
     QPushButton,
-    QCheckBox,
-    QTextEdit,
-    QLabel,
-    QWidget,
     QSizePolicy,
-    QFrame,
     QSplitter,
+    QTextEdit,
+    QVBoxLayout,
+    QWidget,
 )
 
 from config.constants import API_ENDPOINTS

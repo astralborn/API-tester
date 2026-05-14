@@ -15,11 +15,9 @@ The three techniques used throughout this file to make that possible are:
 """
 from __future__ import annotations
 
-import json
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
-
 
 # ---------------------------------------------------------------------------
 # Helpers — build a lightweight mixin instance without a real QWidget

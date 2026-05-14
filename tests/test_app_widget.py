@@ -6,8 +6,8 @@ wiring in mock managers so no real HTTP, disk I/O, or Qt-loop is needed.
 from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
-import pytest
 
+import pytest
 
 # ---------------------------------------------------------------------------
 # Fixture — fully wired app widget
