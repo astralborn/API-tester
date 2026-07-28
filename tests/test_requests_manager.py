@@ -109,6 +109,26 @@ class TestBuildRequest:
             _, payload = request_manager.build_request("10.0.0.1", "/api/call", "ghost.json", False)
         assert payload == {}
 
+    def test_path_traversal_blocked(self, request_manager, tmp_path):
+        """Ensure directory traversal attempts are rejected."""
+        secret = tmp_path / "secret.json"
+        secret.write_text('{"leaked": true}', encoding="utf-8")
+        subfolder = tmp_path / "configs"
+        subfolder.mkdir()
+        with patch("managers.requests_manager.JSON_FOLDER", subfolder):
+            _, payload = request_manager.build_request(
+                "10.0.0.1", "/api/call", "../secret.json", False
+            )
+        assert payload == {}
+
+    def test_path_traversal_with_absolute_path_blocked(self, request_manager, tmp_path):
+        """Ensure absolute path attempts are rejected."""
+        with patch("managers.requests_manager.JSON_FOLDER", tmp_path):
+            _, payload = request_manager.build_request(
+                "10.0.0.1", "/api/call", "/etc/passwd", False
+            )
+        assert payload == {}
+
 
 # ---------------------------------------------------------------------------
 # RequestManager.start_new_log

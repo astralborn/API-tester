@@ -209,8 +209,16 @@ class RequestManager:
         payload: dict[str, Any] = {}
         if json_file and json_file != "(none)":
             try:
-                with (JSON_FOLDER / json_file.strip()).open("r", encoding="utf-8") as f:
+                json_path = (JSON_FOLDER / json_file.strip()).resolve()
+                # Prevent path traversal — resolved path must stay within JSON_FOLDER
+                json_path.relative_to(JSON_FOLDER.resolve())
+                with json_path.open("r", encoding="utf-8") as f:
                     payload = json.load(f)
+            except ValueError:
+                _logger.error(
+                    f"Path traversal blocked for '{json_file}'",
+                    file=json_file,
+                )
             except Exception as exc:
                 _logger.error(
                     f"Failed to load JSON file '{json_file}'",
