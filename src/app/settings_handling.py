@@ -60,25 +60,33 @@ class SettingsHandlingMixin(_SettingsHandlingProtocol):  # type: ignore[misc]
         self.settings.save_settings()
 
     def _auto_save_connection_settings(self: _SettingsHandlingProtocol) -> None:  # type: ignore[misc]
-        """Persist connection-related fields whenever they change."""
+        """Stage connection-related fields and schedule a debounced save."""
         self.settings.set_last_ip(self.ip_edit.text())
         self.settings.set_last_user(self.user_edit.text())
         self.settings.set_last_simple_format(self.simple_check.isChecked())
-        self.settings.save_settings()
+        self._connection_save_timer.start(500)
 
     def _auto_save_ui_settings(self: _SettingsHandlingProtocol) -> None:  # type: ignore[misc]
-        """Persist UI-state fields whenever they change."""
+        """Stage UI-state fields and schedule a debounced save."""
         self.settings.set_last_test_mode(self.test_mode_combo.currentText())
         self.settings.set_last_json_type(self.json_type_combo.currentText())
         self.settings.set_last_endpoint(self.endpoint_combo.currentText())
         self.settings.set_last_json_file(self.json_combo.currentText())
-        self.settings.save_settings()
+        self._ui_save_timer.start(500)
 
     def _setup_geometry_auto_save(self) -> None:
-        """Create a single-shot timer used to debounce geometry saves."""
+        """Create single-shot timers used to debounce all auto-saves."""
         self._geometry_timer = QTimer()
         self._geometry_timer.setSingleShot(True)
         self._geometry_timer.timeout.connect(self._auto_save_geometry)
+
+        self._connection_save_timer = QTimer()
+        self._connection_save_timer.setSingleShot(True)
+        self._connection_save_timer.timeout.connect(self.settings.save_settings)
+
+        self._ui_save_timer = QTimer()
+        self._ui_save_timer.setSingleShot(True)
+        self._ui_save_timer.timeout.connect(self.settings.save_settings)
 
     def _auto_save_geometry(self: _SettingsHandlingProtocol) -> None:  # type: ignore[misc]
         """Write the current window geometry to settings."""

@@ -53,6 +53,10 @@ def mixin():
     obj.settings.get_last_endpoint.return_value      = "/api/test"
     obj.settings.get_window_geometry.return_value    = ""  # empty → no restoreGeometry
 
+    # Debounce timers
+    obj._connection_save_timer = MagicMock()
+    obj._ui_save_timer = MagicMock()
+
     return obj
 
 
@@ -151,7 +155,7 @@ class TestAutoSaveConnectionSettings:
         mixin.settings.set_last_ip.assert_called_once_with("1.2.3.4")
         mixin.settings.set_last_user.assert_called_once_with("bob")
         mixin.settings.set_last_simple_format.assert_called_once_with(True)
-        mixin.settings.save_settings.assert_called_once()
+        mixin._connection_save_timer.start.assert_called_once_with(500)
 
 
 # ---------------------------------------------------------------------------
@@ -169,7 +173,7 @@ class TestAutoSaveUiSettings:
         mixin.settings.set_last_json_type.assert_called_once_with("normal")
         mixin.settings.set_last_endpoint.assert_called_once_with("/api/foo")
         mixin.settings.set_last_json_file.assert_called_once_with("get/foo.json")
-        mixin.settings.save_settings.assert_called_once()
+        mixin._ui_save_timer.start.assert_called_once_with(500)
 
 
 # ---------------------------------------------------------------------------
