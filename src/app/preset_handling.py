@@ -16,6 +16,7 @@ from PySide6.QtWidgets import (
 )
 
 from app.dialogs import MultiSelectDialog
+from config.constants import TestMode
 
 if TYPE_CHECKING:
     from config.di_container import PresetManagerProtocol, RequestManagerProtocol
@@ -70,7 +71,7 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
         if not json_file:
             return False
         is_unhappy = "/unhappy/" in json_file.replace("\\", "/").lower()
-        if (mode == "happy" and is_unhappy) or (mode == "unhappy" and not is_unhappy):
+        if (mode == TestMode.HAPPY and is_unhappy) or (mode == TestMode.UNHAPPY and not is_unhappy):
             return False
         return search.lower() in name.lower()
 

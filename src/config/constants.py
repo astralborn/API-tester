@@ -1,4 +1,5 @@
 import sys
+from enum import StrEnum
 from pathlib import Path
 from typing import Final
 
@@ -22,6 +23,15 @@ def resource_path(relative_path: str) -> Path:
 JSON_FOLDER: Final[Path] = resource_path("config/json_configs")
 LOGS_FOLDER: Final[Path] = resource_path("logs")
 PRESETS_FILE: Final[Path] = resource_path("config/presets.json")
+
+
+# ================= Test Modes =================
+
+class TestMode(StrEnum):
+    """Test scenario filter modes."""
+
+    HAPPY = "happy"
+    UNHAPPY = "unhappy"
 
 
 # ================= Theme Colors =================

@@ -91,8 +91,14 @@ class ApiTestApp(  # type: ignore[misc]  # ty: ignore[inconsistent-mro]
         self._setup_geometry_auto_save()
 
     def closeEvent(self, event) -> None:
-        """Save settings and cancel pending requests before closing."""
+        """Save settings and gracefully shut down pending requests before closing."""
         self.save_settings()
         if self.active_requests:
-            self.cancel_all_requests()
+            # Give workers a chance to finish gracefully
+            for worker in self.active_requests:
+                worker.quit()
+                if not worker.wait(2000):
+                    worker.terminate()
+                    worker.wait()
+            self.active_requests.clear()
         super().closeEvent(event)

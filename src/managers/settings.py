@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from typing import Any, Final
 
-from config.constants import resource_path
+from config.constants import TestMode, resource_path
 from config.logging_system import get_logger
 
 _logger = get_logger("settings_manager")
@@ -55,7 +55,7 @@ class SettingsManager:
             "ui": {
                 "window_geometry": "",
                 "window_state": "",
-                "last_test_mode": "happy",
+                "last_test_mode": TestMode.HAPPY,
                 "last_json_type": "normal",
             },
             "presets": {
@@ -144,7 +144,7 @@ class SettingsManager:
 
         :returns: ``"happy"`` or ``"unhappy"`` (default ``"happy"``).
         """
-        return self.settings.get("ui", {}).get("last_test_mode", "happy")
+        return self.settings.get("ui", {}).get("last_test_mode", TestMode.HAPPY)
 
     def set_last_test_mode(self, mode: str) -> None:
         """Persist the selected test mode.

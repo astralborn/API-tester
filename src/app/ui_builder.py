@@ -21,7 +21,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from config.constants import API_ENDPOINTS
+from config.constants import API_ENDPOINTS, TestMode
 
 BG = "#FAFAFA"
 SIDEBAR_BG = "#F0F0F2"
@@ -279,7 +279,7 @@ class UIBuilderMixin:
         filter_row = QHBoxLayout()
         filter_row.setSpacing(6)
         self.test_mode_combo = QComboBox()
-        self.test_mode_combo.addItems(["happy", "unhappy"])
+        self.test_mode_combo.addItems([TestMode.HAPPY, TestMode.UNHAPPY])
         self.test_mode_combo.setMinimumWidth(90)
         self.test_mode_combo.setMaximumWidth(110)
         self.test_mode_combo.currentTextChanged.connect(self.update_presets_list)
