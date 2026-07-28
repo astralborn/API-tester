@@ -1,6 +1,7 @@
 """Request handling mixin for API Test Tool."""
 from __future__ import annotations
 
+import html
 import ipaddress
 import json
 from typing import TYPE_CHECKING
@@ -173,7 +174,7 @@ class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
 
     def _escape_html(self, text: str) -> str:
         """Escape HTML special characters in *text*."""
-        return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        return html.escape(text)
 
     def _build_response_html(self, text: str, preset_name: str, tag: str) -> str:
         """Return an HTML snippet for one response entry.
