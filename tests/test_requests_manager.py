@@ -255,6 +255,43 @@ class TestRequestWorkerRun:
         assert worker.log_file.exists()
         assert "response body" in worker.log_file.read_text(encoding="utf-8")
 
+    def test_run_timeout_emits_err_tag(self, worker):
+        """Timeout exception → tag 'err', password zeroed."""
+        import requests as req_lib
+
+        with patch("managers.requests_manager.requests.post",
+                   side_effect=req_lib.exceptions.Timeout("timed out")):
+            worker.run()
+
+        text, _, tag = worker.finished.emit.call_args[0]
+        assert tag == "err"
+        assert "timed out" in text
+        assert all(b == 0 for b in worker.password)
+
+    def test_run_ssl_error_emits_err_tag(self, worker):
+        """SSL error → tag 'err', password zeroed."""
+        import requests as req_lib
+
+        with patch("managers.requests_manager.requests.post",
+                   side_effect=req_lib.exceptions.SSLError("certificate verify failed")):
+            worker.run()
+
+        text, _, tag = worker.finished.emit.call_args[0]
+        assert tag == "err"
+        assert "certificate" in text
+        assert all(b == 0 for b in worker.password)
+
+    def test_run_error_text_includes_url(self, worker):
+        """Error response text should include the request URL for debugging."""
+        import requests as req_lib
+
+        with patch("managers.requests_manager.requests.post",
+                   side_effect=req_lib.exceptions.ConnectionError("refused")):
+            worker.run()
+
+        text, _, _ = worker.finished.emit.call_args[0]
+        assert "Request Error:" in text
+
 
 # ---------------------------------------------------------------------------
 # RequestManager._remove_worker / send_request_async
