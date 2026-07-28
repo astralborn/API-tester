@@ -74,10 +74,28 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
             return False
         return search.lower() in name.lower()
 
+    def _invalidate_preset_cache(self) -> None:
+        """Reset the filter cache so the next update_presets_list rebuilds fully."""
+        self._last_filter_search = object()  # sentinel that won't match any string
+        self._last_filter_mode = object()
+
     def update_presets_list(self: _PresetHandlingProtocol) -> None:  # type: ignore[misc]
         """Repopulate the preset and JSON-file combo boxes based on mode and search."""
         search = self.preset_search.text().lower()
         mode = self.test_mode_combo.currentText().lower()
+        preset_count = len(self.presets.presets)
+
+        # Skip rebuild if filters and data haven't changed
+        if (
+            getattr(self, "_last_filter_search", None) == search
+            and getattr(self, "_last_filter_mode", None) == mode
+            and getattr(self, "_last_filter_count", None) == preset_count
+        ):
+            return
+        self._last_filter_search = search
+        self._last_filter_mode = mode
+        self._last_filter_count = preset_count
+
         self.preset_combo.clear()
         self.json_combo.clear()
         self.json_combo.addItem("(none)")
@@ -118,6 +136,7 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
             "simple_format": self.simple_check.isChecked(),
             "json_type": self.json_type_combo.currentText(),
         })
+        self._invalidate_preset_cache()
         self.update_presets_list()
         self.logger.log_preset_action(
             "save_completed",
