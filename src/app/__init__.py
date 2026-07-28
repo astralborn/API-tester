@@ -90,7 +90,7 @@ class ApiTestApp(  # type: ignore[misc]  # ty: ignore[inconsistent-mro]
         self.update_presets_list()
         self._setup_geometry_auto_save()
 
-    def closeEvent(self, event) -> None:
+    def closeEvent(self, event) -> None:  # noqa: N802 — Qt override, must be camelCase
         """Save settings and gracefully shut down pending requests before closing."""
         self.save_settings()
         if self.active_requests:

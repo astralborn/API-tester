@@ -41,7 +41,7 @@
 | **Concurrency** | Non-blocking `QThread` workers, cancellable mid-run |
 | **Type checking** | ty — 0 errors across 16 source files |
 | **Linting / formatting** | ruff |
-| **Test suite** | pytest — 4-layer coverage strategy |
+| **Test suite** | pytest — 288 tests, 4-layer coverage strategy |
 | **Logging** | Plain text + structured JSONL + rotating error file |
 | **Platforms** | Windows (primary), Linux, macOS |
 
@@ -62,10 +62,10 @@ Built specifically for devices that use **self-signed certificates** and **HTTP 
 | 🔁 **Single & batch requests** | Send one request or queue an entire preset sequence automatically |
 | 🔐 **HTTP Digest auth** | Secure per-request authentication; password zeroed from memory after use |
 | ✅ **Happy / unhappy modes** | Filter presets by test scenario type with one click |
-| 🔍 **Live preset search** | Instant substring filter across all preset names |
+| 🔍 **Live preset search** | Instant substring filter across all preset names (cached) |
 | 📦 **5 payload formats** | Normal Path · Normal Action · Normal Body · Google JSON · JSON-RPC |
 | ⚡ **Non-blocking UI** | All HTTP I/O on `QThread` workers — cancel mid-batch at any time |
-| 💾 **Auto-save settings** | IP, credentials, window geometry, last-used preset persist between sessions |
+| 💾 **Auto-save settings** | IP, credentials, window geometry persist between sessions (debounced) |
 | 📝 **Automatic logging** | Every response timestamped and written to `src/logs/` |
 | 🔎 **Pretty-print JSON** | Responses are auto-formatted for readability in the viewer |
 
@@ -231,10 +231,10 @@ uv run ruff format src tests         # format
 
 | Layer | What is tested |
 |:---|:---|
-| **Unit — pure logic** | `_preset_matches`, `_validate_ip`, `_format_json_response`, `_escape_html`, filename sanitisation — no Qt, no I/O |
+| **Unit — pure logic** | `_preset_matches`, `_validate_ip`, `_format_json_response`, `_escape_html`, filename sanitisation, payload generators — no Qt, no I/O |
 | **Unit — managers** | `PresetManager` and `SettingsManager` file I/O via `tmp_path`; `RequestManager` URL building and log creation |
 | **Widget** | Full `ApiTestApp` with real `QApplication` (headless via `pytest-qt`): startup state, send/cancel flows, load/save preset, settings round-trips |
-| **HTTP worker** | `RequestWorker.run()` with `requests.post` patched — success (200), non-200, network error, log output |
+| **HTTP worker** | `RequestWorker.run()` with `requests.post` patched — success (200), non-200, network error, timeout, SSL error, log output |
 | **Infrastructure** | `DIContainer` register/get/singleton; all three Protocols satisfy `isinstance`; `StructuredLogger` all levels; `JsonFormatter` and `ColoredFormatter` output |
 
 ---
@@ -245,9 +245,15 @@ uv run ruff format src tests         # format
 
 **Dependency injection** — a lightweight `DIContainer` wires the three managers (`PresetManager`, `RequestManager`, `SettingsManager`) via structural `Protocol` interfaces, so every component is testable in isolation without touching the UI.
 
+**Enums over magic strings** — `TestMode(StrEnum)` provides type-safe, IDE-friendly mode filtering while remaining compatible with string-based comparisons and JSON serialisation.
+
 **Structured logging** — `StructuredLogger` wraps Python's `logging` module and writes three simultaneous streams per instance (plain text, JSONL, errors-only) with rotating file handlers. One method call — `logger.info(...)` — produces output in all three.
 
 **Memory safety** — passwords are stored as `bytearray` and zeroed immediately after the HTTP request is made, minimising the window the plaintext exists in memory.
+
+**Security** — JSON file loading validates paths stay within the expected directory (preventing path traversal), and HTML output uses `html.escape()` from the standard library.
+
+**CI** — GitHub Actions workflow runs lint, type-check, and test jobs in parallel on every push and PR.
 
 ---
 
