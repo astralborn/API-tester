@@ -7,6 +7,7 @@ writes to ordinary file handlers and the stdlib logging module.
 Tests create loggers pointed at tmp_path (a pytest-provided temporary directory)
 so they never touch the real logs/ folder and leave no side effects.
 """
+
 from __future__ import annotations
 
 import json
@@ -26,6 +27,7 @@ from config.logging_system import (
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def _make_logger(tmp_path: Path, name: str = "test_logger") -> StructuredLogger:
     """Return a StructuredLogger that writes into tmp_path, not logs/."""
@@ -51,6 +53,7 @@ def _make_logger(tmp_path: Path, name: str = "test_logger") -> StructuredLogger:
 # ---------------------------------------------------------------------------
 # StructuredLogger — basic log-level methods
 # ---------------------------------------------------------------------------
+
 
 class TestStructuredLoggerLevels:
     """Each method on StructuredLogger delegates to the stdlib logger at the right level."""
@@ -100,6 +103,7 @@ class TestStructuredLoggerLevels:
 # StructuredLogger — convenience methods
 # ---------------------------------------------------------------------------
 
+
 class TestStructuredLoggerConvenience:
     def test_log_request_includes_method_url_and_status(self, tmp_path):
         lg = _make_logger(tmp_path)
@@ -133,13 +137,19 @@ class TestStructuredLoggerConvenience:
 # JsonFormatter
 # ---------------------------------------------------------------------------
 
+
 class TestJsonFormatter:
     """JsonFormatter must produce valid JSON with the expected top-level keys."""
 
     def _make_record(self, message: str, level: int = logging.INFO) -> logging.LogRecord:
         record = logging.LogRecord(
-            name="test", level=level, pathname="", lineno=0,
-            msg=message, args=(), exc_info=None,
+            name="test",
+            level=level,
+            pathname="",
+            lineno=0,
+            msg=message,
+            args=(),
+            exc_info=None,
         )
         return record
 
@@ -179,9 +189,15 @@ class TestJsonFormatter:
             raise RuntimeError("test error")
         except RuntimeError:
             import sys
+
             record = logging.LogRecord(
-                name="t", level=logging.ERROR, pathname="", lineno=0,
-                msg="oops", args=(), exc_info=sys.exc_info(),
+                name="t",
+                level=logging.ERROR,
+                pathname="",
+                lineno=0,
+                msg="oops",
+                args=(),
+                exc_info=sys.exc_info(),
             )
         parsed = json.loads(fmt.format(record))
         assert "exception" in parsed
@@ -191,8 +207,13 @@ class TestJsonFormatter:
         # Covers the `if record.stack_info` branch (line 152)
         fmt = JsonFormatter()
         record = logging.LogRecord(
-            name="t", level=logging.DEBUG, pathname="", lineno=0,
-            msg="stack", args=(), exc_info=None,
+            name="t",
+            level=logging.DEBUG,
+            pathname="",
+            lineno=0,
+            msg="stack",
+            args=(),
+            exc_info=None,
         )
         record.stack_info = "Stack trace here"
         parsed = json.loads(fmt.format(record))
@@ -203,12 +224,18 @@ class TestJsonFormatter:
 # ColoredFormatter
 # ---------------------------------------------------------------------------
 
+
 class TestColoredFormatter:
     def test_output_contains_message(self):
         fmt = ColoredFormatter("%(levelname)s %(message)s")
         record = logging.LogRecord(
-            name="t", level=logging.INFO, pathname="", lineno=0,
-            msg="colortest", args=(), exc_info=None,
+            name="t",
+            level=logging.INFO,
+            pathname="",
+            lineno=0,
+            msg="colortest",
+            args=(),
+            exc_info=None,
         )
         output = fmt.format(record)
         assert "colortest" in output
@@ -216,8 +243,13 @@ class TestColoredFormatter:
     def test_levelname_contains_ansi_reset(self):
         fmt = ColoredFormatter("%(levelname)s")
         record = logging.LogRecord(
-            name="t", level=logging.WARNING, pathname="", lineno=0,
-            msg="", args=(), exc_info=None,
+            name="t",
+            level=logging.WARNING,
+            pathname="",
+            lineno=0,
+            msg="",
+            args=(),
+            exc_info=None,
         )
         output = fmt.format(record)
         # ANSI reset code must be present after the level name
@@ -227,6 +259,7 @@ class TestColoredFormatter:
 # ---------------------------------------------------------------------------
 # LoggingManager
 # ---------------------------------------------------------------------------
+
 
 class TestLoggingManager:
     def test_get_logger_returns_structured_logger(self):
@@ -262,6 +295,7 @@ class TestLoggingManager:
 # Module-level convenience functions
 # ---------------------------------------------------------------------------
 
+
 class TestModuleFunctions:
     def test_get_logger_returns_structured_logger(self):
         lg = get_logger("module_fn_test")
@@ -272,4 +306,3 @@ class TestModuleFunctions:
 
     def test_cleanup_logging_does_not_raise(self):
         cleanup_logging()  # must not raise
-

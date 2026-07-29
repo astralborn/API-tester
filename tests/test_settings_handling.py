@@ -8,6 +8,7 @@ Same pattern as test_request_handling.py:
   - Methods that use QTimer (_setup_geometry_auto_save) are tested by verifying
     the timer is created; the actual timeout callback is tested separately.
 """
+
 from __future__ import annotations
 
 from unittest.mock import MagicMock
@@ -17,6 +18,7 @@ import pytest
 # ---------------------------------------------------------------------------
 # Shared fixture
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture()
 def mixin():
@@ -29,29 +31,29 @@ def mixin():
     obj = Stub.__new__(Stub)
 
     # Qt widget stand-ins
-    obj.ip_edit         = MagicMock()
-    obj.user_edit       = MagicMock()
-    obj.simple_check    = MagicMock()
+    obj.ip_edit = MagicMock()
+    obj.user_edit = MagicMock()
+    obj.simple_check = MagicMock()
     obj.test_mode_combo = MagicMock()
     obj.json_type_combo = MagicMock()
-    obj.endpoint_combo  = MagicMock()
+    obj.endpoint_combo = MagicMock()
     obj.endpoint_combo.findText.return_value = -1  # default: endpoint not found
-    obj.json_combo      = MagicMock()
+    obj.json_combo = MagicMock()
 
     # restoreGeometry / saveGeometry are QWidget methods — mock them
     obj.restoreGeometry = MagicMock()
-    obj.saveGeometry    = MagicMock()
+    obj.saveGeometry = MagicMock()
     obj.saveGeometry.return_value.data.return_value.hex.return_value = "deadbeef"
 
     # Settings manager mock
     obj.settings = MagicMock()
-    obj.settings.get_last_ip.return_value            = "10.0.0.1"
-    obj.settings.get_last_user.return_value          = "admin"
+    obj.settings.get_last_ip.return_value = "10.0.0.1"
+    obj.settings.get_last_user.return_value = "admin"
     obj.settings.get_last_simple_format.return_value = True
-    obj.settings.get_last_test_mode.return_value     = "unhappy"
-    obj.settings.get_last_json_type.return_value     = "google"
-    obj.settings.get_last_endpoint.return_value      = "/api/test"
-    obj.settings.get_window_geometry.return_value    = ""  # empty → no restoreGeometry
+    obj.settings.get_last_test_mode.return_value = "unhappy"
+    obj.settings.get_last_json_type.return_value = "google"
+    obj.settings.get_last_endpoint.return_value = "/api/test"
+    obj.settings.get_window_geometry.return_value = ""  # empty → no restoreGeometry
 
     # Debounce timers
     obj._connection_save_timer = MagicMock()
@@ -63,6 +65,7 @@ def mixin():
 # ---------------------------------------------------------------------------
 # load_settings
 # ---------------------------------------------------------------------------
+
 
 class TestLoadSettings:
     def test_sets_ip(self, mixin):
@@ -117,6 +120,7 @@ class TestLoadSettings:
 # save_settings
 # ---------------------------------------------------------------------------
 
+
 class TestSaveSettings:
     def test_saves_ip(self, mixin):
         mixin.ip_edit.text.return_value = "192.168.1.50"
@@ -146,6 +150,7 @@ class TestSaveSettings:
 # _auto_save_connection_settings
 # ---------------------------------------------------------------------------
 
+
 class TestAutoSaveConnectionSettings:
     def test_writes_ip_user_and_simple_format(self, mixin):
         mixin.ip_edit.text.return_value = "1.2.3.4"
@@ -162,12 +167,13 @@ class TestAutoSaveConnectionSettings:
 # _auto_save_ui_settings
 # ---------------------------------------------------------------------------
 
+
 class TestAutoSaveUiSettings:
     def test_writes_mode_type_endpoint_and_file(self, mixin):
         mixin.test_mode_combo.currentText.return_value = "happy"
         mixin.json_type_combo.currentText.return_value = "normal"
-        mixin.endpoint_combo.currentText.return_value  = "/api/foo"
-        mixin.json_combo.currentText.return_value      = "get/foo.json"
+        mixin.endpoint_combo.currentText.return_value = "/api/foo"
+        mixin.json_combo.currentText.return_value = "get/foo.json"
         mixin._auto_save_ui_settings()
         mixin.settings.set_last_test_mode.assert_called_once_with("happy")
         mixin.settings.set_last_json_type.assert_called_once_with("normal")
@@ -179,6 +185,7 @@ class TestAutoSaveUiSettings:
 # ---------------------------------------------------------------------------
 # _auto_save_geometry
 # ---------------------------------------------------------------------------
+
 
 class TestAutoSaveGeometry:
     def test_saves_geometry_hex(self, mixin):

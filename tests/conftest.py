@@ -1,4 +1,5 @@
 """Shared pytest fixtures for the API-tester test suite."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -78,4 +79,3 @@ def mock_logger() -> MagicMock:
 # ---------------------------------------------------------------------------
 # Sample preset data (re-exported from helpers for backwards compatibility)
 # ---------------------------------------------------------------------------
-

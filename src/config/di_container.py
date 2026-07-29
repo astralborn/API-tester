@@ -1,4 +1,5 @@
 """Dependency injection container and Protocol interfaces for API Test Tool."""
+
 from __future__ import annotations
 
 from collections.abc import Callable
@@ -6,6 +7,7 @@ from pathlib import Path
 from typing import Any, Protocol, runtime_checkable
 
 # ── Protocols ─────────────────────────────────────────────────────────────────
+
 
 @runtime_checkable
 class PresetManagerProtocol(Protocol):
@@ -74,6 +76,7 @@ class SettingsManagerProtocol(Protocol):
 
 
 # ── DI Container ──────────────────────────────────────────────────────────────
+
 
 class DIContainer:
     """Lightweight dependency injection container.

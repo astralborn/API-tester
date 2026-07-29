@@ -1,4 +1,5 @@
 """Preset manager for API Test Tool."""
+
 from __future__ import annotations
 
 import json

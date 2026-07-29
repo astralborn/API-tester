@@ -1,4 +1,5 @@
 """Tests for managers/requests_manager.py — helpers and RequestManager."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -10,6 +11,7 @@ import pytest
 # Shared fixtures
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def request_manager():
     """A RequestManager with LOGS_FOLDER patched to avoid touching the real log dir."""
@@ -17,6 +19,7 @@ def request_manager():
         mock_logs.mkdir = MagicMock()
         mock_logs.__truediv__ = lambda self, other: Path("/tmp") / other
         from managers.requests_manager import RequestManager
+
         yield RequestManager()
 
 
@@ -44,10 +47,12 @@ def make_worker(tmp_path):
 # make_safe_filename
 # ---------------------------------------------------------------------------
 
+
 class TestMakeSafeFilename:
     @pytest.fixture(autouse=True)
     def _import(self):
         from managers.requests_manager import make_safe_filename
+
         self.fn = make_safe_filename
 
     def test_replaces_spaces(self):
@@ -74,6 +79,7 @@ class TestMakeSafeFilename:
 # ---------------------------------------------------------------------------
 # RequestManager.build_request
 # ---------------------------------------------------------------------------
+
 
 class TestBuildRequest:
     def test_url_built_correctly(self, request_manager):
@@ -134,6 +140,7 @@ class TestBuildRequest:
 # RequestManager.start_new_log
 # ---------------------------------------------------------------------------
 
+
 class TestStartNewLog:
     def test_returns_path_object(self, request_manager):
         assert isinstance(request_manager.start_new_log("MyPreset"), Path)
@@ -150,6 +157,7 @@ class TestStartNewLog:
 # ---------------------------------------------------------------------------
 # RequestWorker._write_log / _ensure_log_file
 # ---------------------------------------------------------------------------
+
 
 class TestRequestWorkerWriteLog:
     def test_write_log_creates_file(self, make_worker, tmp_path):
@@ -184,6 +192,7 @@ class TestRequestWorkerWriteLog:
 # ---------------------------------------------------------------------------
 # RequestWorker.run — success and error paths (no real HTTP)
 # ---------------------------------------------------------------------------
+
 
 class TestRequestWorkerRun:
     """Test RequestWorker.run() by patching requests.post so no real network call happens.
@@ -234,8 +243,10 @@ class TestRequestWorkerRun:
         """Network exception → tag 'err', password zeroed."""
         import requests as req_lib
 
-        with patch("managers.requests_manager.requests.post",
-                   side_effect=req_lib.exceptions.ConnectionError("refused")):
+        with patch(
+            "managers.requests_manager.requests.post",
+            side_effect=req_lib.exceptions.ConnectionError("refused"),
+        ):
             worker.run()
 
         _, _, tag = worker.finished.emit.call_args[0]
@@ -259,8 +270,10 @@ class TestRequestWorkerRun:
         """Timeout exception → tag 'err', password zeroed."""
         import requests as req_lib
 
-        with patch("managers.requests_manager.requests.post",
-                   side_effect=req_lib.exceptions.Timeout("timed out")):
+        with patch(
+            "managers.requests_manager.requests.post",
+            side_effect=req_lib.exceptions.Timeout("timed out"),
+        ):
             worker.run()
 
         text, _, tag = worker.finished.emit.call_args[0]
@@ -272,8 +285,10 @@ class TestRequestWorkerRun:
         """SSL error → tag 'err', password zeroed."""
         import requests as req_lib
 
-        with patch("managers.requests_manager.requests.post",
-                   side_effect=req_lib.exceptions.SSLError("certificate verify failed")):
+        with patch(
+            "managers.requests_manager.requests.post",
+            side_effect=req_lib.exceptions.SSLError("certificate verify failed"),
+        ):
             worker.run()
 
         text, _, tag = worker.finished.emit.call_args[0]
@@ -285,8 +300,10 @@ class TestRequestWorkerRun:
         """Error response text should include the request URL for debugging."""
         import requests as req_lib
 
-        with patch("managers.requests_manager.requests.post",
-                   side_effect=req_lib.exceptions.ConnectionError("refused")):
+        with patch(
+            "managers.requests_manager.requests.post",
+            side_effect=req_lib.exceptions.ConnectionError("refused"),
+        ):
             worker.run()
 
         text, _, _ = worker.finished.emit.call_args[0]
@@ -296,6 +313,7 @@ class TestRequestWorkerRun:
 # ---------------------------------------------------------------------------
 # RequestManager._remove_worker / send_request_async
 # ---------------------------------------------------------------------------
+
 
 class TestRequestManagerWorkerTracking:
     def test_remove_worker_removes_existing(self, request_manager):
@@ -334,10 +352,12 @@ class TestRequestManagerWorkerTracking:
 # RequestWorker.__init__ (real constructor — lines 50-58)
 # ---------------------------------------------------------------------------
 
+
 class TestRequestWorkerInit:
     def test_init_sets_all_attributes(self, qapp):
         """Real __init__ runs via super().__init__() which needs a QApplication."""
         from managers.requests_manager import RequestWorker
+
         worker = RequestWorker(
             url="http://1.2.3.4/api",
             user="admin",
@@ -358,6 +378,7 @@ class TestRequestWorkerInit:
 # RequestWorker._write_log edge cases (lines 125, 132-133)
 # ---------------------------------------------------------------------------
 
+
 class TestWriteLogEdgeCases:
     def test_write_log_with_none_log_file_is_noop(self, make_worker):
         # log_file is None → early return, nothing written (line 125)
@@ -371,5 +392,3 @@ class TestWriteLogEdgeCases:
         with patch.object(Path, "open", side_effect=OSError("permission denied")):
             worker._write_log("body", "ok")  # must not raise
         worker.logger.error.assert_called_once()
-
-

@@ -1,4 +1,5 @@
 """Request handling mixin for API Test Tool."""
+
 from __future__ import annotations
 
 import html
@@ -41,7 +42,6 @@ if TYPE_CHECKING:
         total_request_count: int
         requests: RequestManagerProtocol
         logger: StructuredLogger
-
 
         # Internal methods referenced across methods
         def _validate_ip(self, ip: str) -> bool: ...
@@ -190,14 +190,15 @@ class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
             "font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;"
         )
         body_style = (
-            "font-family: Consolas, monospace; font-size: 12px; "
-            "line-height: 1.5; color: #333333;"
+            "font-family: Consolas, monospace; font-size: 12px; line-height: 1.5; color: #333333;"
         )
         header = f'<div style="{header_style}">{preset_name or "Request"}</div><br>'
         body = self._escape_html(text).replace("\n", "<br>")
         return f'{separator}<div style="{body_style}">{header}{body}</div>'
 
-    def display_response(self: _RequestHandlingProtocol, text: str, preset_name: str, tag: str) -> None:  # type: ignore[misc]
+    def display_response(
+        self: _RequestHandlingProtocol, text: str, preset_name: str, tag: str
+    ) -> None:  # type: ignore[misc]
         """Format and append *text* to the response viewer.
 
         :param text: Raw response text returned by the request worker.

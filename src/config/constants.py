@@ -5,6 +5,7 @@ from typing import Final
 
 # ================= Resource Paths =================
 
+
 def resource_path(relative_path: str) -> Path:
     """
     Return absolute path to a resource (JSON, presets, logs).
@@ -27,6 +28,7 @@ PRESETS_FILE: Final[Path] = resource_path("config/presets.json")
 
 # ================= Test Modes =================
 
+
 class TestMode(StrEnum):
     """Test scenario filter modes."""
 
@@ -35,6 +37,7 @@ class TestMode(StrEnum):
 
 
 # ================= Theme Colors =================
+
 
 class LightTheme:
     BG: Final[str] = "#f0f0f0"
@@ -65,12 +68,10 @@ API_ENDPOINTS: Final[list[str]] = [
     # -------- Base --------
     "/api/call",
     "/api/intercom/",
-
     # -------- Contacts / Intercom --------
     "/api/intercom/GetContacts",
     "/api/intercom/SetContacts",
     "/api/intercom/RemoveContacts",
-
     # -------- SIP Accounts --------
     "/api/call/GetSIPAccount",
     "/api/call/GetSIPAccounts",
@@ -79,7 +80,6 @@ API_ENDPOINTS: Final[list[str]] = [
     "/api/call/RemoveSIPAccount",
     "/api/call/RemoveSIPAccounts",
     "/api/call/GetSIPAccountStatus",
-
     # -------- Service / Capabilities --------
     "/api/call/GetServiceCapabilities",
     "/api/call/GetSupportedSIPAccountAttributes",
@@ -87,13 +87,11 @@ API_ENDPOINTS: Final[list[str]] = [
     "/api/call/GetSIPConfiguration",
     "/api/call/SetSIPConfiguration",
     "/api/call/GetSupportedMediaEncryptionModes",
-
     # -------- Audio / Codecs --------
     "/api/call/GetDefaultAudioCodecs",
     "/api/call/GetSupportedAudioCodecs",
     "/api/call/GetAudioCodecs",
     "/api/call/SetAudioCodecs",
-
     # -------- Call Control --------
     "/api/call/Call",
     "/api/call/GetCallStatus",

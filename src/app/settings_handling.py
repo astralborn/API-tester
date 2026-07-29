@@ -1,4 +1,5 @@
 """Settings handling mixin for API Test Tool."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

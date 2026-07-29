@@ -25,6 +25,7 @@ summary: dict[str, int] = {
     "unhappy_fuzz": 0,
 }
 
+
 # ---------------- Utility Functions ----------------
 def generate_uuid_list(count: int = 1) -> list[str]:
     """Generate a list of UUID strings."""
@@ -130,7 +131,11 @@ REMOVE_PAYLOADS: dict[str, Any] = {
 
 SET_PAYLOADS: dict[str, Any] = {
     "SetSIPAccount": {"SIPAccount": generate_random_sip_account()},
-    "SetSIPAccounts": {"SIPAccounts": {"SIPAccount": [generate_random_sip_account(), generate_random_sip_account()]}},
+    "SetSIPAccounts": {
+        "SIPAccounts": {
+            "SIPAccount": [generate_random_sip_account(), generate_random_sip_account()]
+        }
+    },
     "SetSIPConfiguration": {"SIPConfiguration": {"SIPEnabled": True}},
     "SetAudioCodecs": {"AudioCodec": [{"Name": "G.722", "SampleRate": 16000}]},
     "SetContacts": {"contacts": [generate_random_contact()]},
@@ -183,7 +188,13 @@ def create_wrong_type_payload(data: Any) -> Any:
 
 def create_fuzz_payload(data: Any) -> Any:
     """Create payload with fuzz testing values."""
-    fuzz_strings = ["A" * 5000, "<script>alert(1)</script>", "' OR 1=1 --", "\x00\x01\x02", "漢字🚀"]
+    fuzz_strings = [
+        "A" * 5000,
+        "<script>alert(1)</script>",
+        "' OR 1=1 --",
+        "\x00\x01\x02",
+        "漢字🚀",
+    ]
     fuzz_numbers = [0, -1, 999999999999999999, float("inf"), float("-inf")]
 
     if isinstance(data, dict):
@@ -220,11 +231,11 @@ def create_normal_presets(
     """Create normal test presets for given endpoints."""
     presets = []
     formats = {
-        "Normal_Path":   "normal_path",
+        "Normal_Path": "normal_path",
         "Normal_Action": "normal_action",
-        "Normal_Body":   "normal_body",
-        "Google":        "google",
-        "RPC":           "rpc",
+        "Normal_Body": "normal_body",
+        "Google": "google",
+        "RPC": "rpc",
     }
 
     for endpoint in endpoints:
@@ -267,13 +278,17 @@ def create_normal_presets(
 
             summary["normal"] += 1
 
-            presets.append({
-                "name": f"{method}_{format_name}",
-                "endpoint": endpoint_url,
-                "json_file": json_file_relative,
-                "simple_format": False,
-                "json_type": "normal" if format_name.startswith("Normal") else format_name.lower(),
-            })
+            presets.append(
+                {
+                    "name": f"{method}_{format_name}",
+                    "endpoint": endpoint_url,
+                    "json_file": json_file_relative,
+                    "simple_format": False,
+                    "json_type": "normal"
+                    if format_name.startswith("Normal")
+                    else format_name.lower(),
+                }
+            )
 
     return presets
 
@@ -285,10 +300,10 @@ def create_unhappy_tests(
     """Create unhappy path test presets for error testing."""
     unhappy_presets = []
     test_types = [
-        ("no_data",      create_unhappy_payload,    "unhappy_no_data"),
-        ("invalid_data", create_invalid_payload,    "unhappy_invalid"),
-        ("wrong_type",   create_wrong_type_payload, "unhappy_wrong_type"),
-        ("fuzz",         create_fuzz_payload,       "unhappy_fuzz"),
+        ("no_data", create_unhappy_payload, "unhappy_no_data"),
+        ("invalid_data", create_invalid_payload, "unhappy_invalid"),
+        ("wrong_type", create_wrong_type_payload, "unhappy_wrong_type"),
+        ("fuzz", create_fuzz_payload, "unhappy_fuzz"),
     ]
 
     for endpoint in endpoints:
@@ -306,13 +321,15 @@ def create_unhappy_tests(
             file_path = folder / file_name
             save_json(file_path, test_payload)
 
-            unhappy_presets.append({
-                "name": f"{method}_unhappy_{test_suffix}",
-                "endpoint": endpoint,
-                "json_file": file_path.relative_to(JSON_FOLDER).as_posix(),
-                "simple_format": False,
-                "json_type": "normal",
-            })
+            unhappy_presets.append(
+                {
+                    "name": f"{method}_unhappy_{test_suffix}",
+                    "endpoint": endpoint,
+                    "json_file": file_path.relative_to(JSON_FOLDER).as_posix(),
+                    "simple_format": False,
+                    "json_type": "normal",
+                }
+            )
 
             summary[summary_key] += 1
 

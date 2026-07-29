@@ -1,4 +1,5 @@
 """UI builder module for API Test Tool — modern two-panel design."""
+
 from __future__ import annotations
 
 import itertools
@@ -149,6 +150,7 @@ def _field_label(text: str) -> QLabel:
 
 
 if TYPE_CHECKING:
+
     class _UIBuilderProtocol(QWidget):
         """Typed view of the fully-assembled host class, for use in method stubs."""
 
@@ -171,7 +173,6 @@ if TYPE_CHECKING:
         status_label: QLabel
         status: QLabel
 
-
         # Cross-mixin callbacks
         def _auto_save_connection_settings(self) -> None: ...
         def _auto_save_ui_settings(self) -> None: ...
@@ -193,14 +194,14 @@ class UIBuilderMixin:
     def apply_light_theme(self: _UIBuilderProtocol) -> None:  # type: ignore[misc]
         """Set the Qt palette and global stylesheet to the light theme."""
         palette = QPalette()
-        palette.setColor(QPalette.ColorRole.Window,          QColor(SIDEBAR_BG))
-        palette.setColor(QPalette.ColorRole.Base,            QColor(CARD_BG))
-        palette.setColor(QPalette.ColorRole.AlternateBase,   QColor(BG))
-        palette.setColor(QPalette.ColorRole.Text,            QColor(TEXT_PRIMARY))
-        palette.setColor(QPalette.ColorRole.WindowText,      QColor(TEXT_PRIMARY))
-        palette.setColor(QPalette.ColorRole.Button,          QColor(BTN_BG))
-        palette.setColor(QPalette.ColorRole.ButtonText,      QColor(TEXT_PRIMARY))
-        palette.setColor(QPalette.ColorRole.Highlight,       QColor(ACCENT))
+        palette.setColor(QPalette.ColorRole.Window, QColor(SIDEBAR_BG))
+        palette.setColor(QPalette.ColorRole.Base, QColor(CARD_BG))
+        palette.setColor(QPalette.ColorRole.AlternateBase, QColor(BG))
+        palette.setColor(QPalette.ColorRole.Text, QColor(TEXT_PRIMARY))
+        palette.setColor(QPalette.ColorRole.WindowText, QColor(TEXT_PRIMARY))
+        palette.setColor(QPalette.ColorRole.Button, QColor(BTN_BG))
+        palette.setColor(QPalette.ColorRole.ButtonText, QColor(TEXT_PRIMARY))
+        palette.setColor(QPalette.ColorRole.Highlight, QColor(ACCENT))
         palette.setColor(QPalette.ColorRole.HighlightedText, QColor("#ffffff"))
         QApplication.setPalette(palette)
         self.setStyleSheet(_GLOBAL_QSS)
@@ -228,7 +229,9 @@ class UIBuilderMixin:
         logo_row = QHBoxLayout()
         logo_row.setContentsMargins(0, 0, 0, 0)
         dot = QLabel("●")
-        dot.setStyleSheet(f"color: {ACCENT}; font-size: 13px; background: transparent; border: none;")
+        dot.setStyleSheet(
+            f"color: {ACCENT}; font-size: 13px; background: transparent; border: none;"
+        )
         title = QLabel("API Tester")
         title.setStyleSheet(
             f"color: {TEXT_PRIMARY}; font-size: 15px; font-weight: 700; "
@@ -334,9 +337,7 @@ class UIBuilderMixin:
         # Right-align text so the filename end is visible instead of the folder prefix
         self.json_combo.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         # Show full path as tooltip on hover
-        self.json_combo.currentTextChanged.connect(
-            lambda t: self.json_combo.setToolTip(t)
-        )
+        self.json_combo.currentTextChanged.connect(lambda t: self.json_combo.setToolTip(t))
         req_lay.addWidget(self.json_combo)
         sl.addWidget(req_card)
 
@@ -413,9 +414,7 @@ class UIBuilderMixin:
 
         self.response = QTextEdit(readOnly=True)
         self.response.setLineWrapMode(QTextEdit.LineWrapMode.NoWrap)
-        self.response.setSizePolicy(
-            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
-        )
+        self.response.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         right_layout.addWidget(self.response, 1)
 
         splitter.addWidget(right)

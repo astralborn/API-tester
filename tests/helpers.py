@@ -1,4 +1,5 @@
 """Shared test data and helpers for the API-tester test suite."""
+
 from __future__ import annotations
 
 from typing import Any
@@ -29,4 +30,3 @@ SAMPLE_PRESETS: list[dict[str, Any]] = [
         "json_type": "google",
     },
 ]
-

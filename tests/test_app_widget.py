@@ -3,6 +3,7 @@
 These tests create a real (headless) QApplication + ApiTestApp instance,
 wiring in mock managers so no real HTTP, disk I/O, or Qt-loop is needed.
 """
+
 from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
@@ -12,6 +13,7 @@ import pytest
 # ---------------------------------------------------------------------------
 # Fixture — fully wired app widget
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture()
 def app_widget(qapp, mock_preset_manager, mock_request_manager, mock_settings_manager):
@@ -23,6 +25,7 @@ def app_widget(qapp, mock_preset_manager, mock_request_manager, mock_settings_ma
         patch("app.__init__.resource_path", return_value=MagicMock()),
     ):
         from app import ApiTestApp
+
         widget = ApiTestApp(
             preset_manager=mock_preset_manager,
             request_manager=mock_request_manager,
@@ -35,6 +38,7 @@ def app_widget(qapp, mock_preset_manager, mock_request_manager, mock_settings_ma
 # ---------------------------------------------------------------------------
 # Startup / UI construction
 # ---------------------------------------------------------------------------
+
 
 class TestStartup:
     def test_window_title(self, app_widget):
@@ -65,6 +69,7 @@ class TestStartup:
 # ---------------------------------------------------------------------------
 # send_request validation (no real HTTP)
 # ---------------------------------------------------------------------------
+
 
 class TestSendRequestValidation:
     def test_warns_when_no_ip(self, app_widget, qtbot):
@@ -119,6 +124,7 @@ class TestSendRequestValidation:
 # cancel_all_requests
 # ---------------------------------------------------------------------------
 
+
 class TestCancelRequests:
     def test_cancel_clears_active_requests(self, app_widget, mock_request_manager):
         # Seed one worker
@@ -147,6 +153,7 @@ class TestCancelRequests:
 # ---------------------------------------------------------------------------
 # load_preset
 # ---------------------------------------------------------------------------
+
 
 class TestLoadPreset:
     def test_warns_when_no_preset_selected(self, app_widget):
@@ -186,6 +193,7 @@ class TestLoadPreset:
 # settings round-trip
 # ---------------------------------------------------------------------------
 
+
 class TestSettingsRoundTrip:
     def test_save_settings_calls_manager(self, app_widget, mock_settings_manager):
         app_widget.ip_edit.setText("1.2.3.4")
@@ -208,6 +216,7 @@ class TestSettingsRoundTrip:
 # clear_response
 # ---------------------------------------------------------------------------
 
+
 class TestClearResponse:
     def test_clears_response_widget(self, app_widget, qtbot):
         app_widget.response.insertPlainText("some text")
@@ -219,17 +228,19 @@ class TestClearResponse:
 # ApiTestApp — construction via DIContainer
 # ---------------------------------------------------------------------------
 
+
 class TestContainerConstruction:
     def test_managers_resolved_from_container(
         self, qapp, mock_preset_manager, mock_request_manager, mock_settings_manager
     ):
         """When a DIContainer is passed, managers must be resolved from it (lines 42-45)."""
         from config.di_container import DIContainer
+
         mock_logger = MagicMock()
 
         container = MagicMock(spec=DIContainer)
         container.get.side_effect = lambda name: {
-            "preset_manager":  mock_preset_manager,
+            "preset_manager": mock_preset_manager,
             "request_manager": mock_request_manager,
             "settings_manager": mock_settings_manager,
         }[name]
@@ -239,10 +250,11 @@ class TestContainerConstruction:
             patch("app.__init__.resource_path", return_value=MagicMock()),
         ):
             from app import ApiTestApp
+
             widget = ApiTestApp(container=container)
 
         # All three services must have been fetched from the container
-        assert widget.presets  is mock_preset_manager
+        assert widget.presets is mock_preset_manager
         assert widget.requests is mock_request_manager
         assert widget.settings is mock_settings_manager
         widget.close()
@@ -251,6 +263,7 @@ class TestContainerConstruction:
 # ---------------------------------------------------------------------------
 # send_request — exception path (lines 65-68 of request_handling.py)
 # ---------------------------------------------------------------------------
+
 
 class TestSendRequestExceptionPath:
     def test_exception_during_send_updates_status(self, app_widget):
@@ -293,5 +306,3 @@ class TestSendRequestExceptionPath:
         captured_callback('{"ok":1}', "MyPreset", "ok")
 
         assert "finished" in app_widget.status.text().lower()
-
-

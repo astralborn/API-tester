@@ -1,4 +1,5 @@
 """App package for API Test Tool."""
+
 from __future__ import annotations
 
 import sys
@@ -56,9 +57,15 @@ class ApiTestApp(  # type: ignore[misc]  # ty: ignore[inconsistent-mro]
         self.settings: SettingsManagerProtocol
 
         if container:
-            self.presets = cast(PresetManagerProtocol, preset_manager or container.get("preset_manager"))
-            self.requests = cast(RequestManagerProtocol, request_manager or container.get("request_manager"))
-            self.settings = cast(SettingsManagerProtocol, settings_manager or container.get("settings_manager"))
+            self.presets = cast(
+                PresetManagerProtocol, preset_manager or container.get("preset_manager")
+            )
+            self.requests = cast(
+                RequestManagerProtocol, request_manager or container.get("request_manager")
+            )
+            self.settings = cast(
+                SettingsManagerProtocol, settings_manager or container.get("settings_manager")
+            )
         else:
             from managers.presets import PresetManager
             from managers.requests_manager import RequestManager

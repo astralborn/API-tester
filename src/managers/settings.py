@@ -1,4 +1,5 @@
 """Settings manager for API Test Tool."""
+
 from __future__ import annotations
 
 import json
@@ -210,4 +211,3 @@ class SettingsManager:
         :param json_file: Relative path string to store.
         """
         self.settings.setdefault("presets", {})["last_json_file"] = json_file
-

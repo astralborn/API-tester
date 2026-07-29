@@ -1,4 +1,5 @@
 """Tests for app/preset_handling.py — PresetHandlingMixin (pure-logic method)."""
+
 from __future__ import annotations
 
 import pytest
@@ -8,6 +9,7 @@ from tests.helpers import SAMPLE_PRESETS
 # ---------------------------------------------------------------------------
 # Shared fixture
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture()
 def mixin():
@@ -24,8 +26,8 @@ def mixin():
 # _preset_matches
 # ---------------------------------------------------------------------------
 
-class TestPresetMatches:
 
+class TestPresetMatches:
     # ---- happy / unhappy filtering ----
 
     def test_happy_mode_excludes_unhappy_json(self, mixin):
@@ -76,13 +78,16 @@ class TestPresetMatches:
 
     # ---- all modes for SAMPLE_PRESETS ----
 
-    @pytest.mark.parametrize("preset,mode,search,expected", [
-        (SAMPLE_PRESETS[0], "happy",   "",           True),   # GetContacts Happy
-        (SAMPLE_PRESETS[0], "unhappy", "",           False),  # GetContacts Happy vs unhappy mode
-        (SAMPLE_PRESETS[1], "unhappy", "",           True),   # GetContacts Unhappy
-        (SAMPLE_PRESETS[1], "happy",   "",           False),  # GetContacts Unhappy vs happy mode
-        (SAMPLE_PRESETS[2], "happy",   "sipaccount", True),   # search match
-        (SAMPLE_PRESETS[2], "happy",   "zzz",        False),  # search no match
-    ])
+    @pytest.mark.parametrize(
+        "preset,mode,search,expected",
+        [
+            (SAMPLE_PRESETS[0], "happy", "", True),  # GetContacts Happy
+            (SAMPLE_PRESETS[0], "unhappy", "", False),  # GetContacts Happy vs unhappy mode
+            (SAMPLE_PRESETS[1], "unhappy", "", True),  # GetContacts Unhappy
+            (SAMPLE_PRESETS[1], "happy", "", False),  # GetContacts Unhappy vs happy mode
+            (SAMPLE_PRESETS[2], "happy", "sipaccount", True),  # search match
+            (SAMPLE_PRESETS[2], "happy", "zzz", False),  # search no match
+        ],
+    )
     def test_sample_presets(self, mixin, preset, mode, search, expected):
         assert mixin._preset_matches(preset, mode, search) is expected

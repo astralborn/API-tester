@@ -5,6 +5,7 @@ managers) to exercise the Qt-interaction methods of PresetHandlingMixin that can
 be tested with __new__ alone: update_presets_list, on_preset_changed, save_preset,
 load_preset.
 """
+
 from __future__ import annotations
 
 from unittest.mock import MagicMock, patch
@@ -15,6 +16,7 @@ import pytest
 # Fixture — re-use the one from conftest via app_widget
 # ---------------------------------------------------------------------------
 
+
 @pytest.fixture()
 def app_widget(qapp, mock_preset_manager, mock_request_manager, mock_settings_manager):
     mock_logger = MagicMock()
@@ -23,6 +25,7 @@ def app_widget(qapp, mock_preset_manager, mock_request_manager, mock_settings_ma
         patch("app.__init__.resource_path", return_value=MagicMock()),
     ):
         from app import ApiTestApp
+
         widget = ApiTestApp(
             preset_manager=mock_preset_manager,
             request_manager=mock_request_manager,
@@ -36,12 +39,17 @@ def app_widget(qapp, mock_preset_manager, mock_request_manager, mock_settings_ma
 # update_presets_list  (lines 25-37)
 # ---------------------------------------------------------------------------
 
+
 class TestUpdatePresetsList:
     def test_populates_combo_with_matching_presets(self, app_widget, mock_preset_manager):
         """Matching presets are added to preset_combo."""
         mock_preset_manager.presets = [
-            {"name": "GetContacts Happy", "json_file": "get/normal_action/foo.json",
-             "simple_format": False, "json_type": "normal"},
+            {
+                "name": "GetContacts Happy",
+                "json_file": "get/normal_action/foo.json",
+                "simple_format": False,
+                "json_type": "normal",
+            },
         ]
         app_widget.test_mode_combo.setCurrentText("happy")
         app_widget.preset_search.setText("")
@@ -51,8 +59,12 @@ class TestUpdatePresetsList:
     def test_excludes_non_matching_presets(self, app_widget, mock_preset_manager):
         """Unhappy presets are excluded in happy mode."""
         mock_preset_manager.presets = [
-            {"name": "GetContacts Unhappy", "json_file": "get/unhappy/foo.json",
-             "simple_format": False, "json_type": "normal"},
+            {
+                "name": "GetContacts Unhappy",
+                "json_file": "get/unhappy/foo.json",
+                "simple_format": False,
+                "json_type": "normal",
+            },
         ]
         app_widget.test_mode_combo.setCurrentText("happy")
         app_widget.preset_search.setText("")
@@ -68,6 +80,7 @@ class TestUpdatePresetsList:
 # ---------------------------------------------------------------------------
 # on_preset_changed  (lines 39-48)
 # ---------------------------------------------------------------------------
+
 
 class TestOnPresetChanged:
     def test_sets_json_combo_from_preset(self, app_widget, mock_preset_manager):
@@ -105,6 +118,7 @@ class TestOnPresetChanged:
 # save_preset  (lines 50-64)
 # ---------------------------------------------------------------------------
 
+
 class TestSavePreset:
     def test_save_preset_cancelled_when_dialog_rejected(self, app_widget, mock_preset_manager):
         """If user cancels QInputDialog, add_preset must NOT be called."""
@@ -131,6 +145,7 @@ class TestSavePreset:
 # run_multiple  (lines 88-157)
 # ---------------------------------------------------------------------------
 
+
 class TestRunMultiple:
     def test_warns_when_no_presets_available(self, app_widget):
         """preset_combo empty → QMessageBox.warning, nothing else."""
@@ -142,8 +157,12 @@ class TestRunMultiple:
     def test_does_nothing_when_dialog_cancelled(self, app_widget, mock_preset_manager):
         """User cancels MultiSelectDialog → send_request_async never called."""
         mock_preset_manager.presets = [
-            {"name": "P1", "json_file": "get/normal_action/foo.json",
-             "simple_format": False, "json_type": "normal"},
+            {
+                "name": "P1",
+                "json_file": "get/normal_action/foo.json",
+                "simple_format": False,
+                "json_type": "normal",
+            },
         ]
         app_widget.update_presets_list()
         with patch("app.preset_handling.MultiSelectDialog") as MockDlg:
@@ -155,8 +174,12 @@ class TestRunMultiple:
     def test_warns_when_no_ip(self, app_widget, mock_preset_manager):
         """Dialog accepted but IP empty → warning."""
         mock_preset_manager.presets = [
-            {"name": "P1", "json_file": "get/normal_action/foo.json",
-             "simple_format": False, "json_type": "normal"},
+            {
+                "name": "P1",
+                "json_file": "get/normal_action/foo.json",
+                "simple_format": False,
+                "json_type": "normal",
+            },
         ]
         app_widget.update_presets_list()
         app_widget.ip_edit.setText("")
@@ -170,8 +193,12 @@ class TestRunMultiple:
     def test_warns_when_invalid_ip(self, app_widget, mock_preset_manager):
         """Dialog accepted but IP invalid → warning."""
         mock_preset_manager.presets = [
-            {"name": "P1", "json_file": "get/normal_action/foo.json",
-             "simple_format": False, "json_type": "normal"},
+            {
+                "name": "P1",
+                "json_file": "get/normal_action/foo.json",
+                "simple_format": False,
+                "json_type": "normal",
+            },
         ]
         app_widget.update_presets_list()
         app_widget.ip_edit.setText("not-an-ip")
@@ -185,8 +212,12 @@ class TestRunMultiple:
     def test_warns_when_no_username(self, app_widget, mock_preset_manager):
         """Dialog accepted, valid IP, but no username → warning."""
         mock_preset_manager.presets = [
-            {"name": "P1", "json_file": "get/normal_action/foo.json",
-             "simple_format": False, "json_type": "normal"},
+            {
+                "name": "P1",
+                "json_file": "get/normal_action/foo.json",
+                "simple_format": False,
+                "json_type": "normal",
+            },
         ]
         app_widget.update_presets_list()
         app_widget.ip_edit.setText("10.0.0.1")
@@ -200,9 +231,13 @@ class TestRunMultiple:
 
     def test_happy_path_calls_send_request_async(self, app_widget, mock_preset_manager):
         """Full happy path: valid IP, user, preset → send_request_async called."""
-        preset = {"name": "P1", "endpoint": "/api/test",
-                  "json_file": "get/normal_action/foo.json",
-                  "simple_format": False, "json_type": "normal"}
+        preset = {
+            "name": "P1",
+            "endpoint": "/api/test",
+            "json_file": "get/normal_action/foo.json",
+            "simple_format": False,
+            "json_type": "normal",
+        }
         mock_preset_manager.presets = [preset]
         mock_preset_manager.get_by_name.return_value = preset
         app_widget.update_presets_list()
@@ -219,8 +254,12 @@ class TestRunMultiple:
     def test_log_file_error_shows_critical(self, app_widget, mock_preset_manager):
         """If start_new_log raises → QMessageBox.critical shown."""
         mock_preset_manager.presets = [
-            {"name": "P1", "json_file": "get/normal_action/foo.json",
-             "simple_format": False, "json_type": "normal"},
+            {
+                "name": "P1",
+                "json_file": "get/normal_action/foo.json",
+                "simple_format": False,
+                "json_type": "normal",
+            },
         ]
         app_widget.update_presets_list()
         app_widget.ip_edit.setText("10.0.0.1")
@@ -237,8 +276,12 @@ class TestRunMultiple:
     def test_skips_invalid_preset_and_continues(self, app_widget, mock_preset_manager, qtbot):
         """run_next: preset not found → status shows 'Skipping', moves to next via QTimer."""
         mock_preset_manager.presets = [
-            {"name": "Ghost", "json_file": "get/normal_action/foo.json",
-             "simple_format": False, "json_type": "normal"},
+            {
+                "name": "Ghost",
+                "json_file": "get/normal_action/foo.json",
+                "simple_format": False,
+                "json_type": "normal",
+            },
         ]
         app_widget.update_presets_list()
         app_widget.ip_edit.setText("10.0.0.1")
@@ -257,9 +300,13 @@ class TestRunMultiple:
 
     def test_send_exception_in_run_next_continues(self, app_widget, mock_preset_manager, qtbot):
         """run_next: send_request_async raises → status shows error, moves on via QTimer."""
-        preset = {"name": "P1", "endpoint": "/api/test",
-                  "json_file": "get/normal_action/foo.json",
-                  "simple_format": False, "json_type": "normal"}
+        preset = {
+            "name": "P1",
+            "endpoint": "/api/test",
+            "json_file": "get/normal_action/foo.json",
+            "simple_format": False,
+            "json_type": "normal",
+        }
         mock_preset_manager.presets = [preset]
         mock_preset_manager.get_by_name.return_value = preset
         app_widget.update_presets_list()
@@ -277,9 +324,13 @@ class TestRunMultiple:
 
     def test_all_presets_finished_updates_status(self, app_widget, mock_preset_manager, qtbot):
         """After all presets run, status shows 'All presets finished'."""
-        preset = {"name": "P1", "endpoint": "/api/test",
-                  "json_file": "get/normal_action/foo.json",
-                  "simple_format": False, "json_type": "normal"}
+        preset = {
+            "name": "P1",
+            "endpoint": "/api/test",
+            "json_file": "get/normal_action/foo.json",
+            "simple_format": False,
+            "json_type": "normal",
+        }
         mock_preset_manager.presets = [preset]
         mock_preset_manager.get_by_name.return_value = preset
         app_widget.update_presets_list()
@@ -307,5 +358,3 @@ class TestRunMultiple:
 
         qtbot.wait(50)
         assert "finished" in app_widget.status.text().lower()
-
-

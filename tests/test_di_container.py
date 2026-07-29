@@ -1,4 +1,5 @@
 """Tests for config/di_container.py — DIContainer and protocols."""
+
 from __future__ import annotations
 
 from typing import ClassVar
@@ -18,6 +19,7 @@ from config.di_container import (
 # ---------------------------------------------------------------------------
 # DIContainer — register / get
 # ---------------------------------------------------------------------------
+
 
 class TestDIContainer:
     def test_get_unregistered_raises(self):
@@ -45,9 +47,12 @@ class TestDIContainer:
         c = DIContainer()
         with (
             patch("managers.presets.PRESETS_FILE", MagicMock(exists=lambda: False)),
-            patch("config.constants.resource_path", return_value=MagicMock(
-                exists=lambda: False, mkdir=lambda **_: None, open=MagicMock()
-            )),
+            patch(
+                "config.constants.resource_path",
+                return_value=MagicMock(
+                    exists=lambda: False, mkdir=lambda **_: None, open=MagicMock()
+                ),
+            ),
         ):
             c.register_defaults()
 
@@ -75,31 +80,46 @@ class TestDIContainer:
 # Protocol structural checks
 # ---------------------------------------------------------------------------
 
+
 class TestPresetManagerProtocol:
     def test_mock_satisfies_protocol(self):
         class Stub:
             presets: ClassVar[list] = []
+
             def load_presets(self): ...
             def save_presets(self, presets): ...
             def add_preset(self, preset): ...
             def get_by_name(self, name): ...
             def delete_preset(self, name): ...
+
         assert isinstance(Stub(), PresetManagerProtocol)
 
     def test_object_missing_methods_does_not_satisfy(self):
         class Incomplete:
             def load_presets(self): ...
+
         assert not isinstance(Incomplete(), PresetManagerProtocol)
 
 
 class TestRequestManagerProtocol:
     def test_mock_satisfies_protocol(self):
         class Stub:
-            def send_request_async(self, ip, user, password, endpoint,
-                                   json_file, simple_format, json_type,
-                                   callback, preset_name="", log_file=None): ...
+            def send_request_async(
+                self,
+                ip,
+                user,
+                password,
+                endpoint,
+                json_file,
+                simple_format,
+                json_type,
+                callback,
+                preset_name="",
+                log_file=None,
+            ): ...
             def build_request(self, ip, endpoint, json_file, simple_format): ...
             def start_new_log(self, preset_name): ...
+
         assert isinstance(Stub(), RequestManagerProtocol)
 
 
@@ -124,12 +144,14 @@ class TestSettingsManagerProtocol:
             def set_last_json_file(self, json_file): ...
             def get_window_geometry(self): ...
             def set_window_geometry(self, geometry): ...
+
         assert isinstance(Stub(), SettingsManagerProtocol)
 
 
 # ---------------------------------------------------------------------------
 # Module-level convenience functions
 # ---------------------------------------------------------------------------
+
 
 class TestModuleFunctions:
     def test_get_container_returns_di_container(self):
@@ -146,7 +168,6 @@ class TestModuleFunctions:
         # The default container pre-registers preset_manager, request_manager,
         # and settings_manager, so resolving any of them must not raise.
         from managers.presets import PresetManager
+
         result = resolve("preset_manager")
         assert isinstance(result, PresetManager)
-
-

@@ -1,4 +1,5 @@
 """Preset handling mixin for API Test Tool."""
+
 from __future__ import annotations
 
 from collections import deque
@@ -130,13 +131,15 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
             self.logger.log_user_action("save_preset_cancelled")
             return
         self.logger.log_preset_action("save_started", name)
-        self.presets.add_preset({
-            "name": name,
-            "endpoint": self.endpoint_combo.currentText(),
-            "json_file": self.json_combo.currentText(),
-            "simple_format": self.simple_check.isChecked(),
-            "json_type": self.json_type_combo.currentText(),
-        })
+        self.presets.add_preset(
+            {
+                "name": name,
+                "endpoint": self.endpoint_combo.currentText(),
+                "json_file": self.json_combo.currentText(),
+                "simple_format": self.simple_check.isChecked(),
+                "json_type": self.json_type_combo.currentText(),
+            }
+        )
         self._invalidate_preset_cache()
         self.update_presets_list()
         self.logger.log_preset_action(

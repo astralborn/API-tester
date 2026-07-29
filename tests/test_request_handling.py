@@ -13,6 +13,7 @@ The three techniques used throughout this file to make that possible are:
                  with fake objects that silently absorb any call made to them.
   3. Parametrize — lets one test function cover many inputs without duplicating code.
 """
+
 from __future__ import annotations
 
 from unittest.mock import MagicMock
@@ -22,6 +23,7 @@ import pytest
 # ---------------------------------------------------------------------------
 # Helpers — build a lightweight mixin instance without a real QWidget
 # ---------------------------------------------------------------------------
+
 
 def _make_mixin():
     """Instantiate RequestHandlingMixin in isolation (no Qt needed).
@@ -56,9 +58,9 @@ def _make_mixin():
 
     # Attach fakes for the Qt/logger attributes the mixin methods may touch.
     # Any call like obj.logger.log_user_action("x") silently succeeds and is recorded.
-    obj.logger = MagicMock()   # replaces the structlog logger
-    obj.status = MagicMock()   # replaces the QLabel status bar
-    obj.response = MagicMock() # replaces the QTextEdit response widget
+    obj.logger = MagicMock()  # replaces the structlog logger
+    obj.status = MagicMock()  # replaces the QLabel status bar
+    obj.response = MagicMock()  # replaces the QTextEdit response widget
     return obj
 
 
@@ -69,31 +71,38 @@ def _make_mixin():
 # pytest.mark.parametrize runs the same test function once per value in the list,
 # so 6 valid IPs → 6 separate test cases, 6 invalid IPs → 6 more, all from 2 methods.
 
+
 class TestValidateIp:
     def setup_method(self):
         # setup_method runs before every test method in this class,
         # giving each test a fresh mixin instance with clean MagicMocks.
         self.mixin = _make_mixin()
 
-    @pytest.mark.parametrize("ip", [
-        "192.168.1.1",
-        "10.0.0.1",
-        "255.255.255.255",
-        "0.0.0.0",
-        "::1",          # IPv6 loopback
-        "2001:db8::1",  # IPv6 documentation address
-    ])
+    @pytest.mark.parametrize(
+        "ip",
+        [
+            "192.168.1.1",
+            "10.0.0.1",
+            "255.255.255.255",
+            "0.0.0.0",
+            "::1",  # IPv6 loopback
+            "2001:db8::1",  # IPv6 documentation address
+        ],
+    )
     def test_valid_ips(self, ip):
         assert self.mixin._validate_ip(ip) is True
 
-    @pytest.mark.parametrize("ip", [
-        "",                 # empty string
-        "999.999.999.999",  # out-of-range octets
-        "hello",            # not an IP at all
-        "192.168.1",        # only 3 octets
-        "192.168.1.1.1",    # 5 octets
-        "abc::xyz",         # invalid IPv6 hex
-    ])
+    @pytest.mark.parametrize(
+        "ip",
+        [
+            "",  # empty string
+            "999.999.999.999",  # out-of-range octets
+            "hello",  # not an IP at all
+            "192.168.1",  # only 3 octets
+            "192.168.1.1.1",  # 5 octets
+            "abc::xyz",  # invalid IPv6 hex
+        ],
+    )
     def test_invalid_ips(self, ip):
         assert self.mixin._validate_ip(ip) is False
 
@@ -104,6 +113,7 @@ class TestValidateIp:
 # _format_json_response uses only Python's json module — no Qt.
 # It finds the first '{' or '[' in the text, tries to parse from there,
 # and returns pretty-printed JSON if successful, or the original text if not.
+
 
 class TestFormatJsonResponse:
     def setup_method(self):
@@ -145,6 +155,7 @@ class TestFormatJsonResponse:
 # _escape_html is pure string manipulation — replaces &, <, > with HTML entities.
 # Completely independent of Qt; no mixin state used at all.
 
+
 class TestEscapeHtml:
     def setup_method(self):
         self.mixin = _make_mixin()
@@ -176,6 +187,7 @@ class TestEscapeHtml:
 # _build_response_html assembles an HTML string from parts — no Qt rendering.
 # It calls _escape_html internally and produces a string; the real app then
 # hands that string to a QTextEdit, but that step is NOT tested here.
+
 
 class TestBuildResponseHtml:
     def setup_method(self):
@@ -215,6 +227,7 @@ class TestBuildResponseHtml:
 #       .assert_called_once()          → was setText called exactly once?
 #       .call_args[0][0]               → what string was the first positional argument?
 
+
 class TestUpdateProgress:
     def test_sets_status_when_total_gt_one(self):
         mixin = _make_mixin()
@@ -236,6 +249,7 @@ class TestUpdateProgress:
 # ---------------------------------------------------------------------------
 # These manage self.active_requests and self.btn_cancel.
 # Both are pure list/flag logic — no Qt event loop needed.
+
 
 class TestTrackUntrack:
     def setup_method(self):
@@ -271,8 +285,7 @@ class TestTrackUntrack:
         self.mixin.active_requests = [w1, w2]
         self.mixin._untrack_request(w1)
         # btn_cancel.setEnabled(False) must NOT have been called — w2 still active
-        calls = [c for c in self.mixin.btn_cancel.setEnabled.call_args_list
-                 if c == ((False,), {})]
+        calls = [c for c in self.mixin.btn_cancel.setEnabled.call_args_list if c == ((False,), {})]
         assert len(calls) == 0
 
     def test_untrack_unknown_worker_is_noop(self):
@@ -285,6 +298,7 @@ class TestTrackUntrack:
 # ---------------------------------------------------------------------------
 # display_response calls _format_json_response → _build_response_html → insertHtml.
 # self.response is a MagicMock, so insertHtml is recorded without needing a real widget.
+
 
 class TestDisplayResponse:
     def test_calls_insert_html(self):
@@ -303,5 +317,3 @@ class TestDisplayResponse:
         mixin.display_response("x", "P", "ok")
         # moveCursor must be called at least once (before and after insertHtml)
         assert mixin.response.moveCursor.call_count >= 1
-
-

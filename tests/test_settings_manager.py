@@ -1,4 +1,5 @@
 """Tests for managers/settings.py — SettingsManager."""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -8,12 +9,14 @@ from unittest.mock import patch
 # Helper
 # ---------------------------------------------------------------------------
 
+
 def _make_manager(settings_file: Path):
     with (
         patch("managers.settings.SettingsManager.SETTINGS_FILE", str(settings_file.name)),
         patch("config.constants.resource_path", return_value=settings_file),
     ):
         from managers.settings import SettingsManager
+
         mgr = SettingsManager.__new__(SettingsManager)
         mgr.settings_file = settings_file
         mgr.settings = {}
@@ -24,6 +27,7 @@ def _make_manager(settings_file: Path):
 def _fresh(tmp_path: Path) -> SettingsManager:  # noqa: F821
     """Create a SettingsManager backed by a temp file."""
     from managers.settings import SettingsManager
+
     mgr = SettingsManager.__new__(SettingsManager)
     mgr.settings_file = tmp_path / "settings.json"
     mgr.settings = mgr._get_default_settings()
@@ -33,6 +37,7 @@ def _fresh(tmp_path: Path) -> SettingsManager:  # noqa: F821
 # ---------------------------------------------------------------------------
 # Default settings
 # ---------------------------------------------------------------------------
+
 
 class TestDefaultSettings:
     def test_default_ip_is_empty(self, tmp_path):
@@ -67,6 +72,7 @@ class TestDefaultSettings:
 # ---------------------------------------------------------------------------
 # Setters / getters round-trip
 # ---------------------------------------------------------------------------
+
 
 class TestSettersAndGetters:
     def test_set_get_ip(self, tmp_path):
@@ -124,6 +130,7 @@ class TestSettersAndGetters:
 # Persistence (save → load)
 # ---------------------------------------------------------------------------
 
+
 class TestPersistence:
     def test_save_and_reload(self, tmp_path):
         from managers.settings import SettingsManager
@@ -176,7 +183,7 @@ class TestPersistence:
     def test_real_init_via_resource_path(self, tmp_path):
         """Call SettingsManager.__init__ for real to cover lines 18-20."""
         from managers.settings import SettingsManager
+
         with patch("managers.settings.resource_path", return_value=tmp_path / "s.json"):
             mgr = SettingsManager()
         assert mgr.get_last_ip() == ""
-

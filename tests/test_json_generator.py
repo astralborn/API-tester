@@ -1,4 +1,5 @@
 """Tests for config/json_generator.py — payload generators and preset creation."""
+
 from __future__ import annotations
 
 import json
@@ -10,6 +11,7 @@ import pytest
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture(autouse=True)
 def _reset_summary():
@@ -25,6 +27,7 @@ def _reset_summary():
 # ---------------------------------------------------------------------------
 # Utility functions
 # ---------------------------------------------------------------------------
+
 
 class TestGenerateUuidList:
     def test_returns_list_of_strings(self):
@@ -102,6 +105,7 @@ class TestGetSectionFromEndpoint:
 # Data generators
 # ---------------------------------------------------------------------------
 
+
 class TestGenerateRandomSipAccount:
     def test_returns_dict_with_expected_keys(self):
         from config.json_generator import generate_random_sip_account
@@ -138,6 +142,7 @@ class TestGenerateRandomContact:
 # ---------------------------------------------------------------------------
 # Payload transformation functions
 # ---------------------------------------------------------------------------
+
 
 class TestCreateUnhappyPayload:
     def test_dict_values_emptied(self):
@@ -225,8 +230,11 @@ class TestCreateFuzzPayload:
         from config.json_generator import create_fuzz_payload
 
         fuzz_strings = [
-            "A" * 5000, "<script>alert(1)</script>",
-            "' OR 1=1 --", "\x00\x01\x02", "漢字🚀",
+            "A" * 5000,
+            "<script>alert(1)</script>",
+            "' OR 1=1 --",
+            "\x00\x01\x02",
+            "漢字🚀",
         ]
         result = create_fuzz_payload("test")
         assert result in fuzz_strings
@@ -272,6 +280,7 @@ class TestCreateFuzzPayload:
 # Directory setup
 # ---------------------------------------------------------------------------
 
+
 class TestSetupDirectoryStructure:
     def test_creates_expected_directories(self, tmp_path):
         from config.json_generator import setup_directory_structure
@@ -290,6 +299,7 @@ class TestSetupDirectoryStructure:
 # ---------------------------------------------------------------------------
 # Preset generation
 # ---------------------------------------------------------------------------
+
 
 class TestCreateNormalPresets:
     def test_generates_five_formats_per_endpoint(self, tmp_path):
@@ -441,6 +451,7 @@ class TestCreateUnhappyTests:
 # ---------------------------------------------------------------------------
 # Main function (integration-level)
 # ---------------------------------------------------------------------------
+
 
 class TestMain:
     def test_generates_presets_file(self, tmp_path):

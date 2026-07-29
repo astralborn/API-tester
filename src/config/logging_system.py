@@ -8,6 +8,7 @@ Provides :class:`StructuredLogger` — a thin wrapper around the standard
 * **Error-only rotating file** — ERROR+ with exception details.
 * **Coloured console** — INFO+.
 """
+
 from __future__ import annotations
 
 import json
@@ -19,6 +20,7 @@ from typing import Any, ClassVar
 from config.constants import resource_path
 
 # ── Structured Logger ─────────────────────────────────────────────────────────
+
 
 class StructuredLogger:
     """Enhanced logger with structured output and file rotation."""
@@ -46,9 +48,9 @@ class StructuredLogger:
         """Attach a coloured INFO-level console handler."""
         handler = logging.StreamHandler()
         handler.setLevel(logging.INFO)
-        handler.setFormatter(ColoredFormatter(
-            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-        ))
+        handler.setFormatter(
+            ColoredFormatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+        )
         self.logger.addHandler(handler)
 
     def _setup_file_handler(self) -> None:
@@ -60,10 +62,11 @@ class StructuredLogger:
             encoding="utf-8",
         )
         handler.setLevel(logging.DEBUG)
-        handler.setFormatter(logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s"
-            " - %(funcName)s:%(lineno)d - %(message)s"
-        ))
+        handler.setFormatter(
+            logging.Formatter(
+                "%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s"
+            )
+        )
         self.logger.addHandler(handler)
 
     def _setup_json_handler(self) -> None:
@@ -87,11 +90,13 @@ class StructuredLogger:
             encoding="utf-8",
         )
         handler.setLevel(logging.ERROR)
-        handler.setFormatter(logging.Formatter(
-            "%(asctime)s - %(name)s - %(levelname)s"
-            " - %(funcName)s:%(lineno)d - %(message)s\n"
-            "Exception: %(exc_info)s\n---"
-        ))
+        handler.setFormatter(
+            logging.Formatter(
+                "%(asctime)s - %(name)s - %(levelname)s"
+                " - %(funcName)s:%(lineno)d - %(message)s\n"
+                "Exception: %(exc_info)s\n---"
+            )
+        )
         self.logger.addHandler(handler)
 
     def debug(self, message: str, **kwargs: Any) -> None:
@@ -176,6 +181,7 @@ class StructuredLogger:
 
 # ── Custom Formatters ─────────────────────────────────────────────────────────
 
+
 class ColoredFormatter(logging.Formatter):
     """Logging formatter that prepends ANSI colour codes to the level name."""
 
@@ -217,10 +223,27 @@ class JsonFormatter(logging.Formatter):
             entry["stack_trace"] = record.stack_info
 
         _skip = {
-            "name", "msg", "args", "levelname", "levelno", "pathname",
-            "filename", "module", "lineno", "funcName", "created", "msecs",
-            "relativeCreated", "thread", "threadName", "processName",
-            "process", "getMessage", "exc_info", "exc_text", "stack_info",
+            "name",
+            "msg",
+            "args",
+            "levelname",
+            "levelno",
+            "pathname",
+            "filename",
+            "module",
+            "lineno",
+            "funcName",
+            "created",
+            "msecs",
+            "relativeCreated",
+            "thread",
+            "threadName",
+            "processName",
+            "process",
+            "getMessage",
+            "exc_info",
+            "exc_text",
+            "stack_info",
             "taskName",
         }
         for key, value in record.__dict__.items():
@@ -231,6 +254,7 @@ class JsonFormatter(logging.Formatter):
 
 
 # ── Logging Manager ───────────────────────────────────────────────────────────
+
 
 class LoggingManager:
     """Central registry that creates and caches :class:`StructuredLogger` instances."""

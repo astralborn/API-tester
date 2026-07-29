@@ -1,4 +1,5 @@
 """Dialogs for API Test Tool — modern design."""
+
 from __future__ import annotations
 
 from PySide6.QtCore import Qt

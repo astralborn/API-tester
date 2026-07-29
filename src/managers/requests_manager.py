@@ -1,4 +1,5 @@
 """HTTP request worker and manager for API Test Tool."""
+
 from __future__ import annotations
 
 import contextlib
@@ -26,6 +27,7 @@ _FILENAME_MAX_LEN = 64
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
+
 def make_safe_filename(name: str) -> str:
     """Replace unsafe filename characters with underscores, capped at 64 chars.
 
@@ -41,6 +43,7 @@ def _timestamp() -> str:
 
 
 # ── Worker Thread ─────────────────────────────────────────────────────────────
+
 
 class RequestWorker(QThread):
     """QThread subclass that executes a single HTTP POST and emits the result.
@@ -175,6 +178,7 @@ class RequestWorker(QThread):
 
 
 # ── Request Manager ───────────────────────────────────────────────────────────
+
 
 class RequestManager:
     """Manages :class:`RequestWorker` instances and builds request parameters."""

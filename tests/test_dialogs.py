@@ -8,6 +8,7 @@ The dialog is instantiated and exercised entirely in memory: no .exec() is ever
 called, so the Qt event loop never spins and no window appears on screen.
 Individual methods (toggle_select_all, accept_selection) are called directly.
 """
+
 from __future__ import annotations
 
 import pytest
@@ -24,6 +25,7 @@ def dialog(qapp):
 # ---------------------------------------------------------------------------
 # Construction
 # ---------------------------------------------------------------------------
+
 
 class TestConstruction:
     def test_has_correct_item_count(self, dialog):
@@ -46,9 +48,11 @@ class TestConstruction:
 # toggle_select_all
 # ---------------------------------------------------------------------------
 
+
 class TestToggleSelectAll:
     def test_select_all_selects_every_item(self, dialog):
         from PySide6.QtCore import Qt
+
         # Simulate checking the "Select all" checkbox
         dialog.toggle_select_all(Qt.Checked)
         for i in range(dialog.list_widget.count()):
@@ -56,6 +60,7 @@ class TestToggleSelectAll:
 
     def test_uncheck_all_deselects_every_item(self, dialog):
         from PySide6.QtCore import Qt
+
         # First select all, then deselect all
         dialog.toggle_select_all(Qt.Checked)
         dialog.toggle_select_all(Qt.Unchecked)
@@ -66,6 +71,7 @@ class TestToggleSelectAll:
 # ---------------------------------------------------------------------------
 # accept_selection
 # ---------------------------------------------------------------------------
+
 
 class TestAcceptSelection:
     def test_accept_selection_records_selected_items(self, dialog):
@@ -84,6 +90,7 @@ class TestAcceptSelection:
 
     def test_accept_selection_all_selected(self, dialog):
         from PySide6.QtCore import Qt
+
         dialog.toggle_select_all(Qt.Checked)
         dialog.accept_selection()
         assert dialog.selected == ["Alpha", "Beta", "Gamma"]
@@ -93,4 +100,3 @@ class TestAcceptSelection:
         dlg = MultiSelectDialog([])
         dlg.accept_selection()
         assert dlg.selected == []
-
