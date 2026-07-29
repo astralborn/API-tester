@@ -20,6 +20,9 @@ from config.di_container import (
     SettingsManagerProtocol,
 )
 from config.logging_system import get_logger
+from managers.presets import PresetManager
+from managers.requests_manager import RequestManager
+from managers.settings import SettingsManager
 
 if TYPE_CHECKING:
     from managers.requests_manager import RequestWorker
@@ -67,10 +70,6 @@ class ApiTestApp(  # type: ignore[misc]  # ty: ignore[inconsistent-mro]
                 SettingsManagerProtocol, settings_manager or container.get("settings_manager")
             )
         else:
-            from managers.presets import PresetManager
-            from managers.requests_manager import RequestManager
-            from managers.settings import SettingsManager
-
             self.presets = cast(PresetManagerProtocol, preset_manager or PresetManager())
             self.requests = cast(RequestManagerProtocol, request_manager or RequestManager())
             self.settings = cast(SettingsManagerProtocol, settings_manager or SettingsManager())
@@ -97,7 +96,7 @@ class ApiTestApp(  # type: ignore[misc]  # ty: ignore[inconsistent-mro]
         self.update_presets_list()
         self._setup_geometry_auto_save()
 
-    def closeEvent(self, event) -> None:  # noqa: N802 — Qt override, must be camelCase
+    def closeEvent(self, event) -> None:  # Qt override, must be camelCase
         """Save settings and gracefully shut down pending requests before closing."""
         self.save_settings()
         if self.active_requests:

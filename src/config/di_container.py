@@ -6,6 +6,10 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any, Protocol, runtime_checkable
 
+from managers.presets import PresetManager
+from managers.requests_manager import RequestManager
+from managers.settings import SettingsManager
+
 # ── Protocols ─────────────────────────────────────────────────────────────────
 
 
@@ -121,10 +125,6 @@ class DIContainer:
 
     def register_defaults(self) -> None:
         """Register the three default application services as singletons."""
-        from managers.presets import PresetManager
-        from managers.requests_manager import RequestManager
-        from managers.settings import SettingsManager
-
         self.register("preset_manager", lambda: PresetManager(), singleton=True)
         self.register("request_manager", lambda: RequestManager(), singleton=True)
         self.register("settings_manager", lambda: SettingsManager(), singleton=True)
