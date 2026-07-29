@@ -43,6 +43,9 @@ if TYPE_CHECKING:
         logger: StructuredLogger
         current_request_count: int
         total_request_count: int
+        _last_filter_search: str | None
+        _last_filter_mode: str | None
+        _last_filter_count: int | None
 
         # Cross-mixin and internal method stubs
         def _validate_ip(self, ip: str) -> bool: ...
@@ -51,6 +54,7 @@ if TYPE_CHECKING:
         def _update_progress(self, completed: int, total: int) -> None: ...
         def display_response(self, text: str, preset_name: str, tag: str) -> None: ...
         def _preset_matches(self, preset: dict, mode: str, search: str) -> bool: ...
+        def _invalidate_preset_cache(self) -> None: ...
         def on_preset_changed(self, name: str) -> None: ...
         def update_presets_list(self) -> None: ...
 else:
@@ -78,8 +82,9 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
 
     def _invalidate_preset_cache(self) -> None:
         """Reset the filter cache so the next update_presets_list rebuilds fully."""
-        self._last_filter_search = object()  # sentinel that won't match any string
-        self._last_filter_mode = object()
+        self._last_filter_search = None
+        self._last_filter_mode = None
+        self._last_filter_count = None
 
     def update_presets_list(self: _PresetHandlingProtocol) -> None:  # type: ignore[misc]
         """Repopulate the preset and JSON-file combo boxes based on mode and search."""

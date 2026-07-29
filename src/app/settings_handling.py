@@ -22,6 +22,8 @@ if TYPE_CHECKING:
         endpoint_combo: QComboBox
         json_combo: QComboBox
         settings: SettingsManagerProtocol
+        _connection_save_timer: QTimer
+        _ui_save_timer: QTimer
 else:
     _SettingsHandlingProtocol = object
 
