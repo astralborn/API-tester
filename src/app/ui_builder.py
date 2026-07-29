@@ -191,7 +191,7 @@ else:
 class UIBuilderMixin:
     """Mixin that applies the application theme and constructs the two-panel UI."""
 
-    def apply_light_theme(self: _UIBuilderProtocol) -> None:  # type: ignore[misc]
+    def apply_light_theme(self: _UIBuilderProtocol) -> None:
         """Set the Qt palette and global stylesheet to the light theme."""
         palette = QPalette()
         palette.setColor(QPalette.ColorRole.Window, QColor(SIDEBAR_BG))
@@ -206,7 +206,7 @@ class UIBuilderMixin:
         QApplication.setPalette(palette)
         self.setStyleSheet(_GLOBAL_QSS)
 
-    def build_ui(self: _UIBuilderProtocol) -> None:  # type: ignore[misc]
+    def build_ui(self: _UIBuilderProtocol) -> None:
         """Construct and lay out all widgets in the main window."""
         root = QHBoxLayout()
         self.setLayout(root)

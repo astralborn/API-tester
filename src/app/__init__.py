@@ -28,7 +28,7 @@ if TYPE_CHECKING:
     from managers.requests_manager import RequestWorker
 
 
-class ApiTestApp(  # type: ignore[misc]  # ty: ignore[inconsistent-mro]
+class ApiTestApp(  # ty: ignore[inconsistent-mro]
     QWidget,
     UIBuilderMixin,
     RequestHandlingMixin,

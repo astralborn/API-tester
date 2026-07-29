@@ -61,7 +61,7 @@ else:
     _PresetHandlingProtocol = object
 
 
-class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
+class PresetHandlingMixin(_PresetHandlingProtocol):
     """Mixin that manages preset loading, saving, and batch execution."""
 
     def _preset_matches(self, preset: dict[str, Any], mode: str, search: str) -> bool:
@@ -86,7 +86,7 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
         self._last_filter_mode = None
         self._last_filter_count = None
 
-    def update_presets_list(self: _PresetHandlingProtocol) -> None:  # type: ignore[misc]
+    def update_presets_list(self: _PresetHandlingProtocol) -> None:
         """Repopulate the preset and JSON-file combo boxes based on mode and search."""
         search = self.preset_search.text().lower()
         mode = self.test_mode_combo.currentText().lower()
@@ -114,7 +114,7 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
             self.preset_combo.setCurrentIndex(0)
             self.on_preset_changed(self.preset_combo.currentText())
 
-    def on_preset_changed(self: _PresetHandlingProtocol, name: str) -> None:  # type: ignore[misc]
+    def on_preset_changed(self: _PresetHandlingProtocol, name: str) -> None:
         """Sync the JSON-file combo box when the selected preset changes.
 
         :param name: Name of the newly selected preset.
@@ -129,7 +129,7 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
             self.json_combo.addItem(json_file)
             self.json_combo.setCurrentText(json_file)
 
-    def save_preset(self: _PresetHandlingProtocol) -> None:  # type: ignore[misc]
+    def save_preset(self: _PresetHandlingProtocol) -> None:
         """Prompt the user for a name and persist the current request config as a preset."""
         name, ok = QInputDialog.getText(self, "Preset Name", "Enter preset name:")
         if not ok or not name:
@@ -154,7 +154,7 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
             json_file=self.json_combo.currentText(),
         )
 
-    def load_preset(self: _PresetHandlingProtocol) -> None:  # type: ignore[misc]
+    def load_preset(self: _PresetHandlingProtocol) -> None:
         """Load the currently selected preset into the request UI fields."""
         name = self.preset_combo.currentText().strip()
         if not name:
@@ -178,7 +178,7 @@ class PresetHandlingMixin(_PresetHandlingProtocol):  # type: ignore[misc]
             json_file=preset.get("json_file", "(none)"),
         )
 
-    def run_multiple(self: _PresetHandlingProtocol) -> None:  # type: ignore[misc]
+    def run_multiple(self: _PresetHandlingProtocol) -> None:
         """Open the multi-select dialog and run selected presets sequentially."""
         names = [self.preset_combo.itemText(i) for i in range(self.preset_combo.count())]
         if not names:

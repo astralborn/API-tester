@@ -55,7 +55,7 @@ else:
     _RequestHandlingProtocol = object
 
 
-class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
+class RequestHandlingMixin(_RequestHandlingProtocol):
     """Mixin that handles sending, cancelling, and displaying HTTP requests."""
 
     def _validate_ip(self, ip: str) -> bool:
@@ -66,7 +66,7 @@ class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
         except ValueError:
             return False
 
-    def send_request(self: _RequestHandlingProtocol) -> None:  # type: ignore[misc]
+    def send_request(self: _RequestHandlingProtocol) -> None:
         """Validate inputs and fire a single async HTTP request."""
         ip = self.ip_edit.text().strip()
         if not ip:
@@ -127,7 +127,7 @@ class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
             QMessageBox.critical(self, "Error", f"Failed to send request: {e}")
             self.status.setText("Request failed")
 
-    def cancel_all_requests(self: _RequestHandlingProtocol) -> None:  # type: ignore[misc]
+    def cancel_all_requests(self: _RequestHandlingProtocol) -> None:
         """Terminate all in-flight request workers immediately."""
         if not self.active_requests:
             return
@@ -140,14 +140,14 @@ class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
         self.btn_cancel.setEnabled(False)
         self.status.setText("All requests cancelled")
 
-    def _track_request(self: _RequestHandlingProtocol, worker: RequestWorker) -> None:  # type: ignore[misc]
+    def _track_request(self: _RequestHandlingProtocol, worker: RequestWorker) -> None:
         """Register *worker* as active and enable the Cancel button."""
         self.active_requests.append(worker)
         self.current_request_count += 1
         if len(self.active_requests) == 1:
             self.btn_cancel.setEnabled(True)
 
-    def _untrack_request(self: _RequestHandlingProtocol, worker: RequestWorker) -> None:  # type: ignore[misc]
+    def _untrack_request(self: _RequestHandlingProtocol, worker: RequestWorker) -> None:
         """Remove *worker* from the active list; disable Cancel when idle."""
         if worker in self.active_requests:
             self.active_requests.remove(worker)
@@ -156,7 +156,7 @@ class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
             self.current_request_count = 0
             self.total_request_count = 0
 
-    def _update_progress(self: _RequestHandlingProtocol, completed: int, total: int) -> None:  # type: ignore[misc]
+    def _update_progress(self: _RequestHandlingProtocol, completed: int, total: int) -> None:
         """Update the status bar with the current batch progress."""
         if total > 1:
             self.status.setText(f"Progress: {completed}/{total} requests")
@@ -198,7 +198,7 @@ class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
 
     def display_response(
         self: _RequestHandlingProtocol, text: str, preset_name: str, tag: str
-    ) -> None:  # type: ignore[misc]
+    ) -> None:
         """Format and append *text* to the response viewer.
 
         :param text: Raw response text returned by the request worker.
@@ -211,6 +211,6 @@ class RequestHandlingMixin(_RequestHandlingProtocol):  # type: ignore[misc]
         self.response.insertHtml(html)
         self.response.moveCursor(QTextCursor.MoveOperation.End)
 
-    def clear_response(self: _RequestHandlingProtocol) -> None:  # type: ignore[misc]
+    def clear_response(self: _RequestHandlingProtocol) -> None:
         """Clear all content from the response viewer."""
         self.response.clear()
