@@ -7,7 +7,6 @@ from unittest.mock import patch
 
 import pytest
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
@@ -19,7 +18,7 @@ def _reset_summary():
     from config.json_generator import summary
 
     original = summary.copy()
-    summary.update({k: 0 for k in summary})
+    summary.update(dict.fromkeys(summary, 0))
     yield
     summary.update(original)
 
